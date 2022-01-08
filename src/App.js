@@ -122,7 +122,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    handleNetworkSwitch("polygon");
+    // handleNetworkSwitch("polygon");
   }, []);
 
   const IsMobile = windowDimension <= 700;
@@ -239,7 +239,7 @@ const App = () => {
   const [isApproved, setIsApproved] = useState(false);
 
   const getIsApproved = async () => {
-    const url = `https://prnts-music-nfts.herokuapp.com/api/approvalRequests/${account}/isApproved`;
+    const url = `https://prnts-nfts.herokuapp.com/api/approvalRequests/${account}/isApproved`;
     try {
       const res = await axios.get(url);
       setIsApproved(res.data);
