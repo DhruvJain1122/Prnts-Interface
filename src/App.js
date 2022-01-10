@@ -124,7 +124,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    // handleNetworkSwitch("polygon");
+    handleNetworkSwitch("polygon");
   }, []);
 
   const IsMobile = windowDimension <= 700;
