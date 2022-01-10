@@ -10,7 +10,10 @@ const instance = new web3.eth.Contract(
   // '0xBE290E5D5E1d9d9d145F5ED65a67e1C807179EC2'
   //   "0xA55a8F2016dc3b8959435637095C0F85a6640A5D"
 
-  "0xF8b4B4F7629f4e101dF8C93f7D17205Fed476f43" //rinkeby
+  // "0xF8b4B4F7629f4e101dF8C93f7D17205Fed476f43" //rinkeby
+  // "0xBE290E5D5E1d9d9d145F5ED65a67e1C807179EC2" // mumbai
+  // Mainnet v1.0
+  "0x15c0b561d1af54c8DBAf4aa369dFC448f2d3F375"
 );
 
 export default instance;

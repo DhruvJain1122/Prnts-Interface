@@ -34,8 +34,8 @@ const EditProfile = ({ account }) => {
   const { id } = useParams();
 
   const getUserData = async () => {
-    console.log("id:", id);
-    console.log("account:", account);
+    // console.log("id:", id);
+    // console.log("account:", account);
     try {
       const url_get = `https://prnts-nfts.herokuapp.com/api/users/${account}`;
       const { data } = await axios.get(url_get);
@@ -65,12 +65,12 @@ const EditProfile = ({ account }) => {
       const get_res = await axios.get(url_get);
 
       const res = await axios.patch(url_get, user);
-      console.log(res.data);
+      // console.log(res.data);
     } catch (err) {
       try {
         const url_post = "https://prnts-nfts.herokuapp.com/api/users";
         const res = await axios.post(url_post, user);
-        console.log(res.data);
+        // console.log(res.data);
       } catch (err) {
         console.log(err);
         setLoading(false);

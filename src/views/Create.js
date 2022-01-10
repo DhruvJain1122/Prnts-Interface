@@ -14,8 +14,6 @@ const Create = ({ account, isMobile }) => {
   const pinataApiKey = process.env.REACT_APP_PINATA_API_KEY;
   const pinataSecretApiKey = process.env.REACT_APP_PINATA_SECRET_API_KEY;
 
-  console.log("pinata api key", pinataApiKey);
-
   const [name, setname] = useState("");
   const [symbol, setsymbol] = useState("");
   const [description, setdescription] = useState("");
@@ -55,7 +53,7 @@ const Create = ({ account, isMobile }) => {
       setVideoHash(res.data.IpfsHash);
       // alert(res.data.IpfsHash)
       setvideoUpload(false);
-      console.log(res.data);
+      // console.log(res.data);
     } catch (err) {
       console.log(err);
       setvideoUpload(false);
@@ -83,7 +81,7 @@ const Create = ({ account, isMobile }) => {
       setImageHash(res.data.IpfsHash);
       // alert(res.data.IpfsHash)
       setimageUpload(false);
-      console.log(res.data);
+      // console.log(res.data);
     } catch (err) {
       console.log(err);
       setimageUpload(false);
@@ -141,7 +139,7 @@ const Create = ({ account, isMobile }) => {
       //     };
       // }
 
-      console.log(res.data);
+      // console.log(res.data);
       const tokenURI = res.data.IpfsHash;
 
       // contract will have name, symbol, tokenUri - ERC721 constructor(name, symbol)
@@ -281,7 +279,7 @@ const Create = ({ account, isMobile }) => {
             <PreviewCard
               title={`# ${name} - ${symbol}`}
               username={`${account.slice(0, 6)}....${account.slice(-7, -1)}`}
-              price={`${price} ETH`}
+              price={`${price} MATIC`}
               imageUrl={`https://ipfs.io/ipfs/${imageHash}`}
               editions={editions}
             />
@@ -351,7 +349,7 @@ const Create = ({ account, isMobile }) => {
                 step="0.0000000001"
                 required
                 className="user-input"
-                placeholder="Price in ETH"
+                placeholder="Price in MATIC"
                 title="Allowed till 10 decimal places, i.e min. 10^8 wei"
                 value={price}
                 onChange={(e) => setprice(e.target.value)}

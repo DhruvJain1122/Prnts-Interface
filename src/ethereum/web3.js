@@ -7,7 +7,9 @@ if (typeof window !== "undefined" && typeof window.web3 !== "undefined") {
   web3 = new Web3(window.web3.currentProvider);
 } else {
   const provider = new Web3.providers.HttpProvider(
-    "https://rinkeby.infura.io/v3/cd3a366ba9b347849d4220811f39b339"
+    // "https://rinkeby.infura.io/v3/cd3a366ba9b347849d4220811f39b339"
+    // "https://polygon-mumbai.g.alchemy.com/v2/ndxfvGkVO78DZlLPGl0sH0CrOgqOKiq-"
+    "https://polygon-mainnet.g.alchemy.com/v2/ndxfvGkVO78DZlLPGl0sH0CrOgqOKiq-"
   );
   web3 = new Web3(provider);
 }

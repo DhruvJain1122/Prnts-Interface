@@ -93,7 +93,7 @@ const RequestForApproval = ({ account }) => {
     try {
       if (doRequestExist) {
         const res = await axios.patch(url_get, ApprovalRequest);
-        console.log(res);
+        // console.log(res);
       } else {
         const res = await axios.post(url_post, ApprovalRequest);
       }

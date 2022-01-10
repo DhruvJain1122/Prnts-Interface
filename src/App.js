@@ -29,7 +29,7 @@ const axios = require("axios");
 let provider;
 const infuraId = process.env.REACT_APP_INFURA_ID;
 
-console.log("INFURA_ID", infuraId);
+// console.log("INFURA_ID", infuraId);
 
 const providerOptions = {
   walletconnect: {
@@ -47,7 +47,9 @@ const providerOptions = {
     },
     options: {
       appName: "Prnts",
-      networkUrl: `https://mainnet.infura.io/v3/${infuraId}`,
+      // networkUrl: `https://mainnet.infura.io/v3/${infuraId}`,
+      // networkUrl: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
+      networkUrl: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
       chainId: 1,
     },
     connector: async (_, options) => {
@@ -134,7 +136,7 @@ const App = () => {
   useEffect(() => {
     onConnectWallet();
     const getAccount = async () => {
-      console.log(web3);
+      // console.log(web3);
       const accounts = await web3.eth.getAccounts();
       console.log("account in header: ", accounts[0]);
       // setaccount(accounts[0]);
@@ -243,9 +245,9 @@ const App = () => {
     try {
       const res = await axios.get(url);
       setIsApproved(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     } catch (err) {
-      console.log(err);
+      if (err) console.log(err);
     }
   };
 
