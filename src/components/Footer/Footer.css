@@ -1,53 +1,57 @@
 .footer {
-    margin: 40px 0px 10px 0px;
-    padding: 10px 40px 2px 40px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-    /* box-shadow: inset 21px 21px 42px #dde3e4, inset -21px -21px 42px #f5fbfc; */
-    /* box-shadow: 21px 21px 42px #dde3e4, -21px -21px 42px #f5fbfc; */
-    background: #e9eff0;
-    box-shadow: inset 5px 5px 12px #dbe1e2, inset -5px -5px 12px #f7fdfe;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    align-items: center;
-    /* align-content: center; */
+  /* margin: 40px 0px 0px 0px; */
+  margin-top: auto;
+  padding: 10px 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  /* box-shadow: inset 21px 21px 42px #dde3e4, inset -21px -21px 42px #f5fbfc; */
+  /* box-shadow: 21px 21px 42px #dde3e4, -21px -21px 42px #f5fbfc; */
+  background: #e9eff0;
+  box-shadow: inset 5px 5px 12px #dbe1e2, inset -5px -5px 12px #f7fdfe;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  align-items: center;
+  /* align-content: center; */
+  /* position: absolute; */
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .social {
-    /* display: grid;
+  /* display: grid;
   grid-template-columns: repeat(auto-fill, 100px); */
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .social a {
-    padding: 10px 15px;
+  padding: 10px 15px;
 }
 
 .social a h4 {
-    color: rgb(154, 154, 154);
+  color: rgb(154, 154, 154);
 }
 
 .terms {
-    display: grid;
+  display: grid;
 }
 .terms-right {
-    justify-self: end;
-    display: flex;
-    flex-wrap: wrap;
+  justify-self: end;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .terms-right a {
-    padding: 10px 15px;
+  padding: 10px 15px;
 }
 
 .terms-right a h4 {
-    color: rgb(154, 154, 154);
-    transition-property: all;
-    transition-duration: 0.4s;
-    transition-timing-function: ease-in;
-
+  color: rgb(154, 154, 154);
+  transition-property: all;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in;
 }
 
 .terms-right a h4:hover {
@@ -56,14 +60,14 @@
 }
 
 .footer-logo {
-    color: rgb(154, 154, 154);
-    background: #e9eff0;
-    box-shadow: 5px 5px 12px #dbe1e2, -5px -5px 12px #f7fdfe;
-    padding: 10px 10px;
-    border-radius: 10px;    
-    transition-property: all;
-    transition-duration: 0.4s;
-    transition-timing-function: ease-in;
+  color: rgb(154, 154, 154);
+  background: #e9eff0;
+  box-shadow: 5px 5px 12px #dbe1e2, -5px -5px 12px #f7fdfe;
+  padding: 10px 10px;
+  border-radius: 10px;
+  transition-property: all;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in;
 }
 
 .footer-logo:hover {

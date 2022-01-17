@@ -14,6 +14,7 @@ import RequestForApproval from "./views/RequestForApproval";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
 import "./App.css";
+import styled from "styled-components";
 import Footer from "./components/Footer/Footer";
 
 import Web3Modal from "web3modal";
@@ -28,6 +29,13 @@ const axios = require("axios");
 
 let provider;
 const infuraId = process.env.REACT_APP_INFURA_ID;
+
+const Container = styled.div`
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
 
 // console.log("INFURA_ID", infuraId);
 
@@ -116,7 +124,11 @@ const App = () => {
   };
 
   useEffect(() => {
-    window.ethereum.on("chainChanged", networkChanged);
+    try {
+      window.ethereum.on("chainChanged", networkChanged);
+    } catch (err) {
+      if (err) console.log(err);
+    }
 
     return () => {
       window.ethereum.removeListener("chainChanged", networkChanged);
@@ -257,7 +269,7 @@ const App = () => {
 
   return (
     <BrowserRouter history={createBrowserHistory}>
-      <div>
+      <Container>
         <div
           style={{
             backgroundColor: "#e9eff0",
@@ -396,7 +408,7 @@ const App = () => {
           />
         </Switch>
         <Footer />
-      </div>
+      </Container>
     </BrowserRouter>
   );
 };
