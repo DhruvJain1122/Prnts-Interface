@@ -50,7 +50,9 @@
   overflow: hidden;
   width: 150px;
   height: 150px;
+  border-radius: 150px;
   background: #e9eff0;
+  box-shadow: 5px 5px 12px #dbe1e2, -5px -5px 12px #f7fdfe;
   border-radius: 100px;
   display: grid;
   align-items: center;
@@ -59,8 +61,9 @@
 }
 
 .artist-img-container img {
-  width: 150px;
-  height: 150px;
+  max-height: 150px;
+  max-width: 150px;
+  border-radius: 1000px;
   box-shadow: 5px 5px 12px #dbe1e2, -5px -5px 12px #f7fdfe;
 }
 
@@ -72,7 +75,20 @@
 .artist-title {
   overflow: auto;
   padding: 18px 0px 0px 0px;
+  margin-top: 20px;
   height: 60px;
+  background: linear-gradient(
+    90deg,
+    #1a4bff 15.22%,
+    #62d8f9 32.09%,
+    #ec5157 48.96%,
+    #ff18bd 67.94%,
+    #f9d649 85.34%,
+    #f08e35 99.57%
+  );
+  background-clip: inherit;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .user {

@@ -14,9 +14,9 @@ const Card = ({ imageUrl, description, name, ethAddress }) => {
       <div className="artist-title">
         <b style={{ fontSize: "18px" }}>{name}</b>
       </div>
-      <div className="user">
+      {/* <div className="user">
         <h4 className="user-name"> @{address}</h4>
-      </div>
+      </div> */}
       <div className="desc">
         {description}
         {/* Music Artist. Rapper. */}
