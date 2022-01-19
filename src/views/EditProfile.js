@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams, Redirect } from "react-router-dom";
 import ReactLoading from "react-loading";
 import "../components/EditProfile/EditProfile.css";
+import ProfilePic from "../components/EditProfile/ProfilePic";
 import styled from "styled-components";
 
 const axios = require("axios");
@@ -22,11 +23,14 @@ const TextArea = styled.textarea`
 `;
 
 const EditProfile = ({ account }) => {
+  const [imageHash, setImageHash] = useState(null);
+
   const [user, setUser] = useState({
     id: account,
     name: "",
     username: "",
     about: "",
+    pfpHash: "",
   });
   const [Loading, setLoading] = useState(false);
 
@@ -44,6 +48,7 @@ const EditProfile = ({ account }) => {
         name: data.name,
         username: data.username,
         about: data.about,
+        pfpHash: data.pfpHash,
       };
       setUser(user);
     } catch (err) {}
@@ -86,6 +91,12 @@ const EditProfile = ({ account }) => {
       <div className="form-title">
         <h3>Edit Profile</h3>
       </div>
+      <ProfilePic
+        user={user}
+        setUser={setUser}
+        imageHash={imageHash}
+        setImageHash={setImageHash}
+      />
       <div className="fields">
         <div className="detail-field">
           <div className="nft-name">

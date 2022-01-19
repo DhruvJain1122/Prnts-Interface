@@ -51,7 +51,12 @@ const ProfilePage = ({ account, isMobile }) => {
         </div>
       ) : null}
       <BrowserRouter history={createBrowserHistory}>
-        <Profile name={user.name} username={user.username} ethAddress={id} />
+        <Profile
+          name={user.name}
+          username={user.username}
+          ethAddress={id}
+          pfpHash={user.pfpHash}
+        />
         <div className="creations-collections">
           <Nav id={id} isMobile={isMobile} />
           <Switch>

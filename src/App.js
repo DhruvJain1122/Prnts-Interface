@@ -358,6 +358,7 @@ const App = () => {
           /> */}
         </div>
 
+        <br />
         {/* <button className="btn" onClick={() => console.log(account)}>Account</button> */}
         <Switch>
           <Route path="/" exact component={() => <Home />} />
@@ -383,14 +384,22 @@ const App = () => {
             extraComponent={() => <NotApproved account={account} />}
             account={account}
           />
-          <ProtectedRoute
+          <Route
+            path="/artists/:id/edit-profile"
+            exact
+            // isAuth={true}
+            component={() => <EditProfile account={account} />}
+            // extraComponent={() => null}
+            account={account}
+          />
+          {/* <ProtectedRoute
             path="/artists/:id/edit-profile"
             exact
             isAuth={true}
             component={() => <EditProfile account={account} />}
             extraComponent={() => null}
             account={account}
-          />
+          /> */}
           <ProtectedRoute
             path="/artists/:id/request-for-approval"
             exact

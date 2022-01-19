@@ -32,9 +32,12 @@
 }
 
 .pic-1 img {
-  height: 150px;
+  /* height: 150px;
   width: 150px;
-  zoom: 140%;
+  zoom: 140%; */
+  max-height: 150px;
+  max-width: 150px;
+  border-radius: 1000px;
 }
 
 .details-1 {

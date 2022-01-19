@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import profile from "../../assets/images/default-profile.jpg";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-const Profile = ({ name, username, ethAddress, Id }) => {
+const Profile = ({ name, username, ethAddress, Id, pfpHash }) => {
   const [copied, setCopied] = useState(false);
 
   const address = ethAddress.slice(0, 6) + "....." + ethAddress.slice(-7);
@@ -18,7 +18,10 @@ const Profile = ({ name, username, ethAddress, Id }) => {
     <div>
       <div className="profile-desc">
         <div className="pic-1">
-          <img src={profile} alt="" />
+          <img
+            src={pfpHash ? `https://ipfs.io/ipfs/${pfpHash}` : profile}
+            alt="Profile Pic"
+          />
         </div>
         <div className="details-1">
           {name && (
