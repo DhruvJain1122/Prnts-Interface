@@ -11,12 +11,17 @@ const Card = ({ imageUrl, description, name, ethAddress }) => {
           <img src={imageUrl} alt="" />
         </div>
       </div>
-      <div className="artist-title">
-        <b style={{ fontSize: "18px" }}>{name}</b>
-      </div>
-      {/* <div className="user">
-        <h4 className="user-name"> @{address}</h4>
-      </div> */}
+      {name ? (
+        <div className="artist-title">
+          <b style={{ fontSize: "18px" }}>{name}</b>
+        </div>
+      ) : (
+        // <div className="user">
+        <div className="artist-title">
+          <h4 className="user-name"> @{address}</h4>
+        </div>
+      )}
+
       <div className="desc">
         {description}
         {/* Music Artist. Rapper. */}
