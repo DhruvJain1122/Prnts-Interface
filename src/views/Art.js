@@ -62,10 +62,11 @@ const Art = ({ account }) => {
         .call();
       // console.log(prntPrice);
       setprntPrice(prntPrice);
+      console.log("id: ", id, "tokenId: ", tokenId);
       const ownerArray = await PrntNFTData.methods
         .getOwnerOfToken(id, tokenId)
         .call();
-      //   console.log(ownerArray);
+      console.log("owner array calc: ", ownerArray);
       const totalOwners = ownerArray.length;
       setOwnerArray(ownerArray);
       settotalOwners(totalOwners);
@@ -93,7 +94,8 @@ const Art = ({ account }) => {
         setIsApproved(isApproved);
       }
     } catch (err) {
-      alert("You need to install metamask and connect your wallet.");
+      // alert("You need to install metamask and connect your wallet.");
+      if (err) console.log(err);
     }
   };
 
@@ -122,30 +124,37 @@ const Art = ({ account }) => {
   };
 
   useEffect(() => {
-    const listBids = ownerArray.map((address) => {
-      return (
-        <Bids
-          key={address}
-          address={address}
-          title={address === ownerArray[0] ? "Created by" : "Owned by"}
-          by={`@${address.slice(0, 6)}....${address.slice(-7)}`}
-        />
-      );
-    });
-    listBids.reverse();
-    setlistBids(listBids);
-
-    const no_of_editions = tokenURI.attributes[0].value;
-    // const edition[no_of_editions];
-    const listNoOfEditions = () => {
-      let listEditions = [];
-      for (let i = 1; i <= no_of_editions; i++) {
-        listEditions.push(<option value={i}>{i}</option>);
+    try {
+      console.log("owner array in list bids: ", ownerArray);
+      if (ownerArray.length > 0) {
+        const listBids = ownerArray.map((address) => {
+          return (
+            <Bids
+              key={address}
+              address={address}
+              title={address === ownerArray[0] ? "Created by" : "Owned by"}
+              by={`@${address.slice(0, 6)}....${address.slice(-7)}`}
+            />
+          );
+        });
+        listBids.reverse();
+        setlistBids(listBids);
       }
-      setListEditions(listEditions);
-    };
-    listNoOfEditions();
-  }, [prnt]);
+
+      const no_of_editions = tokenURI.attributes[0].value;
+      // const edition[no_of_editions];
+      const listNoOfEditions = () => {
+        let listEditions = [];
+        for (let i = 1; i <= no_of_editions; i++) {
+          listEditions.push(<option value={i}>{i}</option>);
+        }
+        setListEditions(listEditions);
+      };
+      listNoOfEditions();
+    } catch (err) {
+      if (err) console.log(err);
+    }
+  }, [prnt, ownerArray]);
 
   const selectEdition = (e) => {
     setEdition(e.target.value);
@@ -160,25 +169,33 @@ const Art = ({ account }) => {
         {/* art piece */}
         <div className="art-c">
           <div className="image-c">
-            {/* <img src={`https://ipfs.io/ipfs/${tokenURI.imageHash}`} alt="" /> */}
-            <ReactPlayer
-              className="video-player"
-              controls
-              // url={`https://ipfs.io/ipfs/${tokenURI.videoHash}`}
-              url={tokenURI.image}
-              config={{
-                file: {
-                  attributes: {
-                    controlsList: "nodownload",
-                  },
-                },
-              }}
-              width="70vw"
-              height="50vh"
-              // Disable right click
-              onContextMenu={(e) => e.preventDefault()}
-              onError={() => console.log("onError callback")}
-            />
+            {tokenURI.image ? (
+              tokenURI.image.slice(-4) === "null" ? (
+                <img
+                  src={`https://ipfs.io/ipfs/${tokenURI.imageHash}`}
+                  alt=""
+                />
+              ) : (
+                <ReactPlayer
+                  className="video-player"
+                  controls
+                  // url={`https://ipfs.io/ipfs/${tokenURI.videoHash}`}
+                  url={tokenURI.image}
+                  config={{
+                    file: {
+                      attributes: {
+                        controlsList: "nodownload",
+                      },
+                    },
+                  }}
+                  width="70vw"
+                  height="50vh"
+                  // Disable right click
+                  onContextMenu={(e) => e.preventDefault()}
+                  onError={() => console.log("onError callback")}
+                />
+              )
+            ) : null}
           </div>
         </div>
         {/* creator and owner */}
@@ -188,7 +205,11 @@ const Art = ({ account }) => {
               <div className="css-1mitdaa">
                 <p>
                   @
-                  {`${ownerArray[0].slice(0, 6)}....${ownerArray[0].slice(-7)}`}
+                  {ownerArray.length > 0
+                    ? `${ownerArray[0].slice(0, 6)}....${ownerArray[0].slice(
+                        -7
+                      )}`
+                    : ""}
                 </p>
               </div>
             </Link>
@@ -200,10 +221,12 @@ const Art = ({ account }) => {
                 <div className="css-3ts36d">
                   <p>
                     @
-                    {`${ownerArray[totalOwners - 1].slice(
-                      0,
-                      6
-                    )}....${ownerArray[totalOwners - 1].slice(-7)}`}
+                    {ownerArray.length > 0
+                      ? `${ownerArray[totalOwners - 1].slice(
+                          0,
+                          6
+                        )}....${ownerArray[totalOwners - 1].slice(-7)}`
+                      : ""}
                   </p>
                 </div>
               </Link>

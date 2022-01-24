@@ -4,6 +4,7 @@ import web3 from "../../ethereum/web3";
 import Artwork from "../Artworks/Card/Card";
 import PrntNFTMarketplace from "../../ethereum/PrntNFTMarketplace";
 import PrntNFTData from "../../ethereum/PrntNFTData";
+import { rejectedCards } from "../../utils/config";
 
 const Collections = () => {
   const { id } = useParams();
@@ -38,6 +39,14 @@ const Collections = () => {
                 .tokensByAddress(prnt[0], 1)
                 .call();
               const len = ownerArray.length;
+
+              const rejectCards = rejectedCards;
+
+              for (let i = 0; i < rejectCards.length; i++) {
+                if (prnt[0] === rejectCards[i]) {
+                  return null;
+                }
+              }
 
               return (
                 <div key={prnt[0]} onClick={refresh}>

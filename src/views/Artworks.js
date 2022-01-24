@@ -5,6 +5,7 @@ import Card from "../components/Artworks/Card/Card";
 // import PrntNFT from '../ethereum/PrntNFT';
 import web3 from "../ethereum/web3";
 import PrntNFTData from "../ethereum/PrntNFTData";
+import { rejectedCards } from "../utils/config";
 
 const Artworks = () => {
   const [listItems, setlistItems] = useState(null);
@@ -59,6 +60,14 @@ const Artworks = () => {
               //         console.log(err);
               //         alert('Something went wrong.');
               //     });
+              const rejectCards = rejectedCards;
+
+              for (let i = 0; i < rejectCards.length; i++) {
+                if (items[0] === rejectCards[i]) {
+                  return null;
+                }
+              }
+
               return (
                 <div key={items[0]}>
                   <Link to={`/music/${items[0]}/1`}>

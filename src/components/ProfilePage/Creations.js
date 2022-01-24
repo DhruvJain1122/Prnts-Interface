@@ -4,6 +4,7 @@ import web3 from "../../ethereum/web3";
 import Artwork from "../Artworks/Card/Card";
 import PrntNFTFactory from "../../ethereum/PrntNFTFactory";
 import PrntNFTData from "../../ethereum/PrntNFTData";
+import { rejectedCards } from "../../utils/config";
 // import PrntNFTData from '../../ethereum/PrntNFTData';
 
 const Creations = () => {
@@ -35,6 +36,14 @@ const Creations = () => {
             .call();
           const creator = ownerArray[0];
           // console.log(creator);
+
+          const rejectCards = rejectedCards;
+
+          for (let i = 0; i < rejectCards.length; i++) {
+            if (prnt[0] === rejectCards[i]) {
+              return null;
+            }
+          }
           return (
             <div key={prnt[0]} onClick={refresh}>
               <Link to={`/music/${prnt[0]}/1`}>

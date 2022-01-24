@@ -106,7 +106,7 @@ const Create = ({ account, isMobile }) => {
         {
           display_type: "number",
           trait_type: "Total Editions",
-          value: editions,
+          value: editions ? editions : "1",
         },
       ],
     },
@@ -141,6 +141,15 @@ const Create = ({ account, isMobile }) => {
 
       // console.log(res.data);
       const tokenURI = res.data.IpfsHash;
+      console.log(
+        "argg: ",
+        name,
+        symbol,
+        tokenURI,
+        web3.utils.toWei(price, "ether"),
+        editions ? editions : "1",
+        royalties
+      );
 
       // contract will have name, symbol, tokenUri - ERC721 constructor(name, symbol)
       await PrntNFTFactory.methods
@@ -149,7 +158,7 @@ const Create = ({ account, isMobile }) => {
           symbol,
           tokenURI,
           web3.utils.toWei(price, "ether"),
-          editions,
+          editions ? editions : "1",
           royalties
         )
         .send({
@@ -281,7 +290,7 @@ const Create = ({ account, isMobile }) => {
               username={`${account.slice(0, 6)}....${account.slice(-7, -1)}`}
               price={`${price} MATIC`}
               imageUrl={`https://ipfs.io/ipfs/${imageHash}`}
-              editions={editions}
+              editions={editions ? editions : 1}
             />
           </div>
           <div className="detail-field">
@@ -331,7 +340,7 @@ const Create = ({ account, isMobile }) => {
                 <input
                   type="number"
                   min="0"
-                  max="100"
+                  max="10"
                   step="0.01"
                   title="Recommended ( 10% )"
                   className="user-input small"
