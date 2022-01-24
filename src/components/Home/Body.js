@@ -10,7 +10,7 @@ const Body = () => {
         <h1 style={{ padding: "10px 0px 20px 0px" }}>
           {/* Imagine music as NFTS{' '} */}
         </h1>
-        <Link to="/music">
+        <Link to="/">
           <button className="btn">
             <h3>Explore Music</h3>
           </button>

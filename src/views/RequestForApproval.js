@@ -104,7 +104,7 @@ const RequestForApproval = ({ account }) => {
       setLoading(false);
       return;
     }
-    history.push("/music");
+    history.push("/");
   };
 
   return (

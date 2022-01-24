@@ -179,7 +179,7 @@ const Create = ({ account, isMobile }) => {
       setLoading(false);
       // // alert("NFT minted successfully!")
       // return <Redirect to="/music" />;
-      history.push("/music");
+      history.push("/");
       // window.location.reload();
     } catch (err) {
       console.log(err);

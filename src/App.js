@@ -361,8 +361,8 @@ const App = () => {
         <br />
         {/* <button className="btn" onClick={() => console.log(account)}>Account</button> */}
         <Switch>
-          <Route path="/" exact component={() => <Home />} />
-          <Route path="/music" exact component={() => <Artworks />} />
+          <Route path="/home" exact component={() => <Home />} />
+          <Route path="/" exact component={() => <Artworks />} />
           <Route path="/artists" exact component={() => <Artists />} />
           <Route
             path="/music/:id/:tokenId"

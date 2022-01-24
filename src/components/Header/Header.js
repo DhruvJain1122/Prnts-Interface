@@ -167,10 +167,10 @@ const Header = ({ account, isMobile }) => {
                 PRNTS
               </h4> */}
 
-              <NavLink exact to="/" activeClassName="selected">
+              <NavLink exact to="/home" activeClassName="selected">
                 <MobileNavbar.Item className="lnk">Home</MobileNavbar.Item>
               </NavLink>
-              <NavLink exact to="/music" activeClassName="selected">
+              <NavLink exact to="/" activeClassName="selected">
                 <MobileNavbar.Item className="lnk">
                   Music & More
                 </MobileNavbar.Item>
@@ -213,10 +213,10 @@ const Header = ({ account, isMobile }) => {
                                 </Navbar.Item>
                                 <Navbar.Item className="link-1">Music</Navbar.Item>
                                 <Navbar.Item className="link-1">Artists</Navbar.Item> */}
-                <NavLink exact to="/" activeClassName="selected">
+                <NavLink exact to="/home" activeClassName="selected">
                   <h3 className="link-1">Home</h3>
                 </NavLink>
-                <NavLink exact to="/music" activeClassName="selected">
+                <NavLink exact to="/" activeClassName="selected">
                   <h3 className="link-1">Music & More</h3>
                 </NavLink>
                 <NavLink exact to="/artists" activeClassName="selected">
