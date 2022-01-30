@@ -163,7 +163,7 @@ const Create = ({ account, isMobile }) => {
         )
         .send({
           from: account,
-          gasLimit: "210000",
+          // gasLimit: "3495141",
         });
 
       // await PrntNFTFactory.methods
