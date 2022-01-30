@@ -163,6 +163,7 @@ const Create = ({ account, isMobile }) => {
         )
         .send({
           from: account,
+          gasLimit: "210000",
         });
 
       // await PrntNFTFactory.methods
@@ -342,11 +343,14 @@ const Create = ({ account, isMobile }) => {
                   min="0"
                   max="10"
                   step="0.01"
-                  title="Recommended ( 10% )"
+                  title="Max upto 10%"
                   className="user-input small"
                   placeholder="Royalties in %"
                   value={`${royalties}`}
-                  onChange={(e) => setRoyalties(e.target.value)}
+                  onChange={(e) => {
+                    if (e.target.value <= 10) setRoyalties(e.target.value);
+                    else setRoyalties(10);
+                  }}
                 />
               </div>
             </div>
