@@ -23,7 +23,7 @@ const NotApproved = ({ account }) => {
       ) : null}
 
       <div className="btn approval-request">
-        <Link to={`/artists/${account}/request-for-approval`}>
+        <Link to={`/profile/${account}/request-for-approval`}>
           <h3>
             {isRequestSent ? (
               <span>Edit Request</span>

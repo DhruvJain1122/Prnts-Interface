@@ -27,7 +27,7 @@ const Artists = () => {
         return userData().then((data) => {
           return (
             <div key={address}>
-              <Link to={`/artists/${address}`}>
+              <Link to={`/profile/${address}`}>
                 <Card
                   ethAddress={address}
                   name={data ? data.name : ""}
@@ -52,7 +52,7 @@ const Artists = () => {
         //   if (res.data) data = res.data;
         //   return (
         //     <div key={address}>
-        //       <Link to={`/artists/${address}`}>
+        //       <Link to={`/profile/${address}`}>
         //         <Card
         //           ethAddress={address}
         //           name={data ? data.name : ""}

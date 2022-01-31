@@ -56,7 +56,7 @@ const EditProfile = ({ account }) => {
 
   useEffect(() => {
     if (account && id !== account) {
-      history.push(`/artists/${account}/edit-profile`);
+      history.push(`/profile/${account}/edit-profile`);
       window.location.reload();
     }
     getUserData();
@@ -81,7 +81,7 @@ const EditProfile = ({ account }) => {
         setLoading(false);
       }
     }
-    history.push(`/artists/${user.id}`);
+    history.push(`/profile/${user.id}`);
 
     setLoading(false);
   };

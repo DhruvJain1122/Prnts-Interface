@@ -328,13 +328,16 @@ const Create = ({ account, isMobile }) => {
                   type="number"
                   min="1"
                   step="1"
-                  max="10"
+                  max="90"
                   // name=""
                   className="user-input small"
                   placeholder="Editions"
-                  title="No. of Editions (Integers only, Maximum 10 allowed)"
+                  title="No. of Editions (Integers only, Max upto 90)"
                   value={editions}
-                  onChange={(e) => setEditions(e.target.value)}
+                  onChange={(e) => {
+                    if (e.target.value <= 90) setEditions(e.target.value);
+                    else setEditions(90);
+                  }}
                 />
               </div>
               <div className="nft-royalties">
@@ -346,7 +349,7 @@ const Create = ({ account, isMobile }) => {
                   title="Max upto 10%"
                   className="user-input small"
                   placeholder="Royalties in %"
-                  value={`${royalties}`}
+                  value={royalties}
                   onChange={(e) => {
                     if (e.target.value <= 10) setRoyalties(e.target.value);
                     else setRoyalties(10);

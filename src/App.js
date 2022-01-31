@@ -363,14 +363,14 @@ const App = () => {
         <Switch>
           <Route path="/home" exact component={() => <Home />} />
           <Route path="/" exact component={() => <Artworks />} />
-          <Route path="/artists" exact component={() => <Artists />} />
+          <Route path="/community" exact component={() => <Artists />} />
           <Route
             path="/music/:id/:tokenId"
             exact
             component={() => <Art account={account} />}
           />
           <Route
-            path="/artists/:id"
+            path="/profile/:id"
             exact
             component={() => (
               <ProfilePage account={account} isMobile={isMobile} />
@@ -385,7 +385,7 @@ const App = () => {
             account={account}
           />
           <Route
-            path="/artists/:id/edit-profile"
+            path="/profile/:id/edit-profile"
             exact
             // isAuth={true}
             component={() => <EditProfile account={account} />}
@@ -393,7 +393,7 @@ const App = () => {
             account={account}
           />
           {/* <ProtectedRoute
-            path="/artists/:id/edit-profile"
+            path="/profile/:id/edit-profile"
             exact
             isAuth={true}
             component={() => <EditProfile account={account} />}
@@ -401,7 +401,7 @@ const App = () => {
             account={account}
           /> */}
           <ProtectedRoute
-            path="/artists/:id/request-for-approval"
+            path="/profile/:id/request-for-approval"
             exact
             isAuth={isApproved}
             component={(props) => (

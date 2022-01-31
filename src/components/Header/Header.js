@@ -129,7 +129,7 @@ const Header = ({ account, isMobile }) => {
                   >
                     <div>
                       <div onClick={refreshPage}>
-                        <Link to={`/artists/${account}`}>
+                        <Link to={`/community/${account}`}>
                           <h4
                             // className="link-2"
                             style={{
@@ -175,8 +175,8 @@ const Header = ({ account, isMobile }) => {
                   Music & More
                 </MobileNavbar.Item>
               </NavLink>
-              <NavLink exact to="/artists" activeClassName="selected">
-                <MobileNavbar.Item className="lnk">Artists</MobileNavbar.Item>
+              <NavLink exact to="/community" activeClassName="selected">
+                <MobileNavbar.Item className="lnk">Community</MobileNavbar.Item>
               </NavLink>
               {/* {
                 account === null
@@ -219,8 +219,8 @@ const Header = ({ account, isMobile }) => {
                 <NavLink exact to="/" activeClassName="selected">
                   <h3 className="link-1">Music & More</h3>
                 </NavLink>
-                <NavLink exact to="/artists" activeClassName="selected">
-                  <h3 className="link-1">Artists</h3>
+                <NavLink exact to="/community" activeClassName="selected">
+                  <h3 className="link-1">Community</h3>
                 </NavLink>
               </Navbar.Items>
             </Navbar.Wrapper>
@@ -234,7 +234,7 @@ const Header = ({ account, isMobile }) => {
               {account === "" || typeof account === "undefined" ? null : ( // <ConnectWallet isMobile={isMobile} account={account} /> // <button className="btn" id="connect wallet">Connect Wallet</button>
                 <div className="profile-links">
                   <div onClick={refreshPage}>
-                    <Link to={`/artists/${account}`}>
+                    <Link to={`/profile/${account}`}>
                       <h4 className="link-2">Profile</h4>
                     </Link>
                   </div>
@@ -249,7 +249,7 @@ const Header = ({ account, isMobile }) => {
 
               {/* <div className="profile-links">
                 <div onClick={refreshPage}>
-                    <Link to={`/artists/${account}`}><h4 className="link-2" >Profile</h4></Link> 
+                    <Link to={`/profile/${account}`}><h4 className="link-2" >Profile</h4></Link> 
                 </div>
                 <div>
                     <Link to='/create'><h4 className="link-2">+Create</h4></Link>
@@ -284,7 +284,7 @@ const Header = ({ account, isMobile }) => {
         // </NavLink>
         // <NavLink
         //     exact
-        //     to='/artists'
+        //     to='/community'
         //     activeClassName="selected"
         // >
 
@@ -299,7 +299,7 @@ const Header = ({ account, isMobile }) => {
         //     :
         //     <div className="profile-links">
         //         <div onClick={refreshPage}>
-        //             <Link to={`/artists/${account}`}><h4 className="link-2" >Profile</h4></Link>
+        //             <Link to={`/profile/${account}`}><h4 className="link-2" >Profile</h4></Link>
         //         </div>
         //         <div>
         //             <Link to='/create'><h4 className="link-2">+Create</h4></Link>

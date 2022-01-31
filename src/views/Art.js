@@ -201,7 +201,7 @@ const Art = ({ account }) => {
         {/* creator and owner */}
         <div className="det">
           <div className="css-4cffwv">
-            <Link to={`/artists/${ownerArray[0]}`}>
+            <Link to={`/profile/${ownerArray[0]}`}>
               <div className="css-1mitdaa">
                 <p>
                   @
@@ -217,7 +217,7 @@ const Art = ({ account }) => {
 
           <div className="css-ykl0r1">
             <div className="css-yk10r2">
-              <Link to={`/artists/${ownerArray[totalOwners - 1]}`}>
+              <Link to={`/profile/${ownerArray[totalOwners - 1]}`}>
                 <div className="css-3ts36d">
                   <p>
                     @

@@ -43,7 +43,7 @@ const ProfilePage = ({ account, isMobile }) => {
         <div>
           <Link
             exact
-            to={`/artists/${id}/edit-profile`}
+            to={`/profile/${id}/edit-profile`}
             className="btn edit-profile"
           >
             {isMobile ? <h5>Edit Profile</h5> : <h3>Edit Profile</h3>}
@@ -60,9 +60,9 @@ const ProfilePage = ({ account, isMobile }) => {
         <div className="creations-collections">
           <Nav id={id} isMobile={isMobile} />
           <Switch>
-            <Route path="/artists/:id" exact component={Creations} />
+            <Route path="/profile/:id" exact component={Creations} />
             <Route
-              path="/artists/:id/collections"
+              path="/profile/:id/collections"
               exact
               component={Collections}
             />
