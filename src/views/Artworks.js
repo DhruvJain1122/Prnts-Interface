@@ -9,7 +9,6 @@ import { rejectedCards } from "../utils/config";
 
 const Artworks = () => {
   const [listItems, setlistItems] = useState(null);
-  const [editionToBuy, setEditionToBuy] = useState({ value: "" });
 
   const listArtworks = async () => {
     const list = await PrntNFTData.methods.getAllPrnts().call();
@@ -59,7 +58,6 @@ const Artworks = () => {
                     .getOwnerOfToken(items[0], i)
                     .call();
                   if (ownerArray.length === 1) {
-                    setEditionToBuy(i);
                     // console.log("edition to buy:", i);
                     return i;
                   }

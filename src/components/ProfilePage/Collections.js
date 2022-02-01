@@ -40,40 +40,60 @@ const Collections = () => {
                 .call();
               const len = ownerArray.length;
 
-              const rejectCards = rejectedCards;
-
-              for (let i = 0; i < rejectCards.length; i++) {
-                if (prnt[0] === rejectCards[i]) {
-                  return null;
+              const editions = tokenURI.attributes[0].value;
+              const fetchEditionToBuy = async () => {
+                for (let i = 1; i <= editions; i++) {
+                  const ownerArray = await PrntNFTData.methods
+                    .getOwnerOfToken(prnt.prntNFT, i)
+                    .call();
+                  if (ownerArray.length === 1) {
+                    // console.log("edition to buy:", i);
+                    return i;
+                  }
                 }
-              }
+                return 1;
+              };
 
-              return (
-                <div key={prnt[0]} onClick={refresh}>
-                  {ownerArray[len - 1] !== id ? ( //here it will be always true sadly :(
-                    <p
-                      style={{
-                        color: "red",
-                        margin: "10px 0px",
-                      }}
-                    >
-                      **Previously Owned
-                    </p>
-                  ) : null}
-                  <Link to={`/music/${prnt[0]}/1`}>
-                    <Artwork
-                      title={`# ${tokenURI.name} - ${tokenURI.symbol}`}
-                      username={`${creator.slice(0, 6)}....${creator.slice(
-                        -7,
-                        -1
-                      )}`}
-                      price={`${web3.utils.fromWei(prntPrice, "ether")} MATIC`}
-                      imageUrl={`https://ipfs.io/ipfs/${tokenURI.imageHash}`}
-                      editions={tokenURI.attributes[0].value}
-                    />
-                  </Link>
-                </div>
-              );
+              return fetchEditionToBuy().then(async (editionToBuy) => {
+                const rejectCards = rejectedCards;
+
+                for (let i = 0; i < rejectCards.length; i++) {
+                  if (prnt[0] === rejectCards[i]) {
+                    return null;
+                  }
+                }
+
+                return (
+                  <div key={prnt[0]} onClick={refresh}>
+                    {ownerArray[len - 1] !== id ? ( //here it will be always true sadly :(
+                      <p
+                        style={{
+                          color: "red",
+                          margin: "10px 0px",
+                        }}
+                      >
+                        **Previously Owned
+                      </p>
+                    ) : null}
+                    <Link to={`/music/${prnt[0]}/${editionToBuy}`}>
+                      <Artwork
+                        title={`# ${tokenURI.name} - ${tokenURI.symbol}`}
+                        username={`${creator.slice(0, 6)}....${creator.slice(
+                          -7,
+                          -1
+                        )}`}
+                        price={`${web3.utils.fromWei(
+                          prntPrice,
+                          "ether"
+                        )} MATIC`}
+                        imageUrl={`https://ipfs.io/ipfs/${tokenURI.imageHash}`}
+                        editions={tokenURI.attributes[0].value}
+                        editionToBuy={editionToBuy}
+                      />
+                    </Link>
+                  </div>
+                );
+              });
             })
             .catch((err) => {
               console.log(err);

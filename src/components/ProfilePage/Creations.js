@@ -22,46 +22,73 @@ const Creations = () => {
     let promises = creations.map((prnt) => {
       // await getPrnt(address);
       // console.log(prnt);
-      return fetch(prnt.tokenUri).then((res) => {
-        let tokenURI;
-        return res.json().then(async (res) => {
-          tokenURI = res;
+      return fetch(prnt.tokenUri)
+        .then((res) => {
+          let tokenURI;
+          return res
+            .json()
+            .then(async (res) => {
+              tokenURI = res;
 
-          const { prntPrice, status } = await PrntNFTData.methods
-            .tokensByAddress(prnt.prntNFT, 1) // display price of 1st edition
-            .call();
+              const { prntPrice, status } = await PrntNFTData.methods
+                .tokensByAddress(prnt.prntNFT, 1) // display price of 1st edition
+                .call();
 
-          const ownerArray = await PrntNFTData.methods
-            .getOwnerOfToken(prnt.prntNFT, 1)
-            .call();
-          const creator = ownerArray[0];
-          // console.log(creator);
+              const ownerArray = await PrntNFTData.methods
+                .getOwnerOfToken(prnt.prntNFT, 1)
+                .call();
+              const creator = ownerArray[0];
+              // console.log(creator);
 
-          const rejectCards = rejectedCards;
+              const editions = tokenURI.attributes[0].value;
+              const fetchEditionToBuy = async () => {
+                for (let i = 1; i <= editions; i++) {
+                  const ownerArray = await PrntNFTData.methods
+                    .getOwnerOfToken(prnt.prntNFT, i)
+                    .call();
+                  if (ownerArray.length === 1) {
+                    // console.log("edition to buy:", i);
+                    return i;
+                  }
+                }
+                return 1;
+              };
 
-          for (let i = 0; i < rejectCards.length; i++) {
-            if (prnt[0] === rejectCards[i]) {
-              return null;
-            }
-          }
-          return (
-            <div key={prnt[0]} onClick={refresh}>
-              <Link to={`/music/${prnt[0]}/1`}>
-                <Artwork
-                  title={`# ${tokenURI.name} - ${tokenURI.symbol}`}
-                  username={`${creator.slice(0, 6)}....${creator.slice(
-                    -7,
-                    -1
-                  )}`}
-                  price={`${web3.utils.fromWei(prntPrice, "ether")} MATIC`}
-                  imageUrl={`https://ipfs.io/ipfs/${tokenURI.imageHash}`}
-                  editions={tokenURI.attributes[0].value}
-                />
-              </Link>
-            </div>
-          );
+              return fetchEditionToBuy().then(async (editionToBuy) => {
+                const rejectCards = rejectedCards;
+
+                for (let i = 0; i < rejectCards.length; i++) {
+                  if (prnt[0] === rejectCards[i]) {
+                    return null;
+                  }
+                }
+                return (
+                  <div key={prnt[0]} onClick={refresh}>
+                    <Link to={`/music/${prnt[0]}/${editionToBuy}`}>
+                      <Artwork
+                        title={`# ${tokenURI.name} - ${tokenURI.symbol}`}
+                        username={`${creator.slice(0, 6)}....${creator.slice(
+                          -7,
+                          -1
+                        )}`}
+                        price={`${web3.utils.fromWei(
+                          prntPrice,
+                          "ether"
+                        )} MATIC`}
+                        imageUrl={`https://ipfs.io/ipfs/${tokenURI.imageHash}`}
+                        editions={tokenURI.attributes[0].value}
+                        editionToBuy={editionToBuy}
+                      />
+                    </Link>
+                  </div>
+                );
+              });
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      });
     });
 
     Promise.all(promises).then((listCreations) => {

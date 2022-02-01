@@ -6,6 +6,7 @@ import PrntNFTData from "../../ethereum/PrntNFTData";
 const Body = () => {
   const [latestMint, setLatestMint] = useState();
   const [tokenURI, setTokenURI] = useState();
+  const [editionToBuy, setEditionToBuy] = useState();
 
   const listArtworks = async () => {
     try {
@@ -22,14 +23,42 @@ const Body = () => {
       if (err) console.log(err);
     }
   };
+
+  const fetchEditionToBuy = async () => {
+    const editions = tokenURI?.attributes[0].value;
+    console.log("ediitons: ", editions);
+    for (let i = 1; i <= editions; i++) {
+      const ownerArray = await PrntNFTData.methods
+        .getOwnerOfToken(latestMint[0], i)
+        .call();
+      if (ownerArray.length === 1) {
+        setEditionToBuy(i);
+        return;
+        // console.log("edition to buy:", i);
+        // return i;
+      }
+    }
+    // return 1;
+  };
   useEffect(() => {
     listArtworks();
   }, []);
+
+  useEffect(() => {
+    fetchEditionToBuy();
+  }, [tokenURI]);
+
   return (
     <div className="intro">
       <div className="intro-img">
         {/* <img src={introImg} alt="" /> */}
-        <Link to={`/music/${latestMint ? latestMint[0] : ""}/1`}>
+        <Link
+          to={
+            editionToBuy
+              ? `/music/${latestMint ? latestMint[0] : ""}/${editionToBuy}`
+              : "/home"
+          }
+        >
           <img
             src={tokenURI ? `https://ipfs.io/ipfs/${tokenURI.imageHash}` : ""}
             alt=""
