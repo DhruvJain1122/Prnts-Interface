@@ -29,7 +29,7 @@ const Footer = () => {
       </div>
       <div className="terms">
         <div className="terms-right">
-          <Link to="">
+          {/* <Link to="">
             <h4>Terms of Service</h4>
           </Link>
           <Link to="">
@@ -37,7 +37,7 @@ const Footer = () => {
           </Link>
           <Link to="">
             <h4>Help</h4>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>
