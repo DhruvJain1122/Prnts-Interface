@@ -301,39 +301,62 @@ const App = () => {
           >
             {account === "" || typeof account === "undefined" ? (
               isMobile ? (
-                <div
-                  className="btn"
-                  style={{
-                    top: "1vh",
-                    right: "2vw",
-                    position: "fixed",
-                    // blockSize: 'smaller'
-                    zoom: "90%",
-                  }}
-                >
-                  <FaWallet onClick={() => onConnectWallet()} />
-                </div>
+                <>
+                  <div
+                    className="btn"
+                    style={{
+                      top: "1vh",
+                      right: "2vw",
+                      position: "fixed",
+                      // blockSize: 'smaller'
+                      zoom: "90%",
+                    }}
+                  >
+                    <FaWallet onClick={() => onConnectWallet()} />
+                  </div>
+                </>
               ) : (
-                <button
-                  className="btn"
-                  style={{
-                    // marginLeft: "0px",
-                    // right: "15px",
-                    // top: "15px",
-                    position: "absolute",
-                    zIndex: "1",
-                    // padding: '15px 15px',
-                    // marginLeft: "0px"
-                    right: "2vw",
-                    top: "1.45vh",
-                    // left: "100px"
-                  }}
-                  onClick={() => onConnectWallet()}
-                >
-                  <h4>
-                    <span>Wallet</span>
-                  </h4>
-                </button>
+                <div style={{ display: "grid", gap: "10px" }}>
+                  <a
+                    className="btn"
+                    href="https://www.moonpay.com/buy/matic"
+                    target="_blank"
+                    style={{
+                      maxWidth: "150px",
+                      display: "flex",
+                      width: "115px",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      position: "absolute",
+                      zIndex: "1",
+                      right: "8vw",
+                      top: "1.45vh",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Buy Matic
+                  </a>
+                  <button
+                    className="btn"
+                    style={{
+                      // marginLeft: "0px",
+                      // right: "15px",
+                      // top: "15px",
+                      position: "absolute",
+                      zIndex: "1",
+                      // padding: '15px 15px',
+                      // marginLeft: "0px"
+                      right: "2vw",
+                      top: "1.45vh",
+                      // left: "100px"
+                    }}
+                    onClick={() => onConnectWallet()}
+                  >
+                    <h4>
+                      <span>Wallet</span>
+                    </h4>
+                  </button>
+                </div>
               )
             ) : (
               <h4
