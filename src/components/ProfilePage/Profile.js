@@ -19,7 +19,9 @@ const Profile = ({ name, username, ethAddress, Id, pfpHash }) => {
       <div className="profile-desc">
         <div className="pic-1">
           <img
-            src={pfpHash ? `https://ipfs.io/ipfs/${pfpHash}` : profile}
+            src={
+              pfpHash ? `https://prnts.mypinata.cloud/ipfs/${pfpHash}` : profile
+            }
             alt="Profile Pic"
           />
         </div>

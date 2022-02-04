@@ -129,7 +129,7 @@ const Header = ({ account, isMobile }) => {
                   >
                     <div>
                       <div onClick={refreshPage}>
-                        <Link to={`/community/${account}`}>
+                        <Link to={`/profile/${account}`}>
                           <h4
                             // className="link-2"
                             style={{

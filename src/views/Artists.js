@@ -34,7 +34,7 @@ const Artists = () => {
                   imageUrl={
                     data
                       ? data.pfpHash
-                        ? `https://ipfs.io/ipfs/${data.pfpHash}`
+                        ? `https://prnts.mypinata.cloud/ipfs/${data.pfpHash}`
                         : profile
                       : profile
                   }
@@ -59,7 +59,7 @@ const Artists = () => {
         //           imageUrl={
         //             data
         //               ? data.pfpHash
-        //                 ? `https://ipfs.io/ipfs/${data.pfpHash}`
+        //                 ? `https://prnts.mypinata.cloud/ipfs/${data.pfpHash}`
         //                 : profile
         //               : profile
         //           }

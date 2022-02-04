@@ -15,7 +15,7 @@ import PrntNFTFactory from "../ethereum/PrntNFTFactory";
 import Modal from "../components/Art/ApproveModal/ApproveModal";
 import useModal from "../hooks/useModal";
 
-const Art = ({ account }) => {
+const Art = ({ account, isMobile }) => {
   const { id, tokenId } = useParams();
 
   let history = useHistory();
@@ -172,15 +172,24 @@ const Art = ({ account }) => {
             {tokenURI.image ? (
               tokenURI.image.slice(-4) === "null" ? (
                 <img
-                  src={`https://ipfs.io/ipfs/${tokenURI.imageHash}`}
+                  src={`https://prnts.mypinata.cloud/ipfs/${tokenURI.imageHash}`}
                   alt=""
                 />
               ) : (
                 <ReactPlayer
                   className="video-player"
                   controls
-                  // url={`https://ipfs.io/ipfs/${tokenURI.videoHash}`}
-                  url={tokenURI.image}
+                  loop
+                  playing
+                  url={`https://prnts.mypinata.cloud/ipfs/${tokenURI.image.slice(
+                    -46
+                  )}`}
+                  // url={tokenURI.image}
+                  light={
+                    isMobile
+                      ? `https://prnts.mypinata.cloud/ipfs/${tokenURI.imageHash}`
+                      : false
+                  }
                   config={{
                     file: {
                       attributes: {

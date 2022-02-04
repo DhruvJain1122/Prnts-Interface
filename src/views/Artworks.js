@@ -85,7 +85,7 @@ const Artworks = () => {
                           prntPrice,
                           "ether"
                         )} MATIC`}
-                        imageUrl={`https://ipfs.io/ipfs/${tokenURI.imageHash}`}
+                        imageUrl={`https://prnts.mypinata.cloud/ipfs/${tokenURI.imageHash}`}
                         editions={tokenURI.attributes[0].value}
                         editionToBuy={editionToBuy}
                       />

@@ -315,6 +315,8 @@ const App = () => {
                       href="https://www.moonpay.com/buy/matic"
                       target="_blank"
                       style={{
+                        // maxWidth: "100px",
+                        // width: "100px",
                         display: "flex",
                         justifyContent: "center",
                         borderRadius: "20px",
@@ -324,17 +326,19 @@ const App = () => {
                         // right: "8vw",
                         // top: "1.45vh",
                         top: "1vh",
-                        right: "20vw",
+                        // left: "18vw",
+                        left: "2vw",
                         position: "fixed",
                         fontWeight: "bold",
                         fontSize: "13px",
                         zoom: "90%",
                       }}
                     >
-                      <img
+                      {/* <img
                         style={{ width: "20px", height: "20px" }}
                         src={MaticToken}
-                      />
+                      /> */}
+                      Buy Matic
                     </a>
                   </div>
                   <div
@@ -427,10 +431,11 @@ const App = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    <img
+                    {/* <img
                       style={{ width: "20px", height: "20px" }}
                       src={MaticToken}
-                    />
+                    /> */}
+                    Buy Matic
                   </a>
                 </div>
               </>
@@ -452,7 +457,7 @@ const App = () => {
           <Route
             path="/music/:id/:tokenId"
             exact
-            component={() => <Art account={account} />}
+            component={() => <Art account={account} isMobile={isMobile} />}
           />
           <Route
             path="/profile/:id"

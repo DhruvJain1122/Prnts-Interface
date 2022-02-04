@@ -98,7 +98,7 @@ const Create = ({ account, isMobile }) => {
       description: description,
       // no_of_editions: editions,
       // category: category,
-      image: `https://ipfs.io/ipfs/${videoHash}`,
+      image: `https://prnts.mypinata.cloud/ipfs/${videoHash}`,
       imageHash: imageHash,
       // external_url: `http://prnts.netlify.app/music`,
       background_color: "b2d8d8",
@@ -290,7 +290,7 @@ const Create = ({ account, isMobile }) => {
               title={`# ${name} - ${symbol}`}
               username={`${account.slice(0, 6)}....${account.slice(-7, -1)}`}
               price={`${price} MATIC`}
-              imageUrl={`https://ipfs.io/ipfs/${imageHash}`}
+              imageUrl={`https://prnts.mypinata.cloud/ipfs/${imageHash}`}
               editions={editions ? editions : 1}
             />
           </div>

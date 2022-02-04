@@ -60,7 +60,11 @@ const Body = () => {
           }
         >
           <img
-            src={tokenURI ? `https://ipfs.io/ipfs/${tokenURI.imageHash}` : ""}
+            src={
+              tokenURI
+                ? `https://prnts.mypinata.cloud/ipfs/${tokenURI.imageHash}`
+                : ""
+            }
             alt=""
           />
         </Link>

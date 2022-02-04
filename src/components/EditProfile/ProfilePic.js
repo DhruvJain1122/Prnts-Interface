@@ -76,7 +76,7 @@ const ProfilePic = ({ imageHash, setImageHash, user, setUser }) => {
           />
         ) : user.pfpHash ? (
           <img
-            src={`https://ipfs.io/ipfs/${user.pfpHash}`}
+            src={`https://prnts.mypinata.cloud/ipfs/${user.pfpHash}`}
             alt={selectedImage ? selectedImage.name : "Preview"}
           />
         ) : (
