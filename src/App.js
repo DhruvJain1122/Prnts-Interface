@@ -13,6 +13,8 @@ import EditProfile from "./views/EditProfile";
 import RequestForApproval from "./views/RequestForApproval";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
+import MaticToken from "./assets/images/matic-token-icon.webp";
+
 import "./App.css";
 import styled from "styled-components";
 import Footer from "./components/Footer/Footer";
@@ -43,7 +45,12 @@ const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider, // required
     options: {
-      infuraId: infuraId, // required
+      // infuraId: infuraId, // required
+      rpc: {
+        1: `https://mainnet.infura.io/v3/${infuraId}`,
+        4: `https://rinkeby.infura.io/v3/${infuraId}`,
+        137: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
+      },
     },
   },
   "custom-walletlink": {
@@ -302,6 +309,34 @@ const App = () => {
             {account === "" || typeof account === "undefined" ? (
               isMobile ? (
                 <>
+                  <div>
+                    <a
+                      className="btn"
+                      href="https://www.moonpay.com/buy/matic"
+                      target="_blank"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        borderRadius: "20px",
+                        textAlign: "center",
+                        position: "absolute",
+                        zIndex: "1",
+                        // right: "8vw",
+                        // top: "1.45vh",
+                        top: "1vh",
+                        right: "20vw",
+                        position: "fixed",
+                        fontWeight: "bold",
+                        fontSize: "13px",
+                        zoom: "90%",
+                      }}
+                    >
+                      <img
+                        style={{ width: "20px", height: "20px" }}
+                        src={MaticToken}
+                      />
+                    </a>
+                  </div>
                   <div
                     className="btn"
                     style={{
@@ -359,19 +394,46 @@ const App = () => {
                 </div>
               )
             ) : (
-              <h4
-                style={{
-                  top: "1vh",
-                  left: `${isMobile ? "4vw" : "2vw"}`,
-                  position: "fixed",
-                  margin: "5px 0px",
-                  zoom: `${isMobile ? "85%" : "100%"}`,
-                }}
-                className="btn"
-                onClick={onDisconnect}
-              >
-                <FaSignOutAlt size={13} />
-              </h4>
+              <>
+                <h4
+                  style={{
+                    top: "1vh",
+                    // left: `${isMobile ? "4vw" : "2vw"}`,
+                    left: `${isMobile ? "40px" : "40px"}`,
+                    position: "fixed",
+                    margin: "5px 0px",
+                    zoom: `${isMobile ? "85%" : "100%"}`,
+                  }}
+                  className="btn"
+                  onClick={onDisconnect}
+                >
+                  <FaSignOutAlt size={13} />
+                </h4>
+                <div>
+                  <a
+                    className="btn"
+                    href="https://www.moonpay.com/buy/matic"
+                    target="_blank"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      zIndex: "1",
+                      top: "1vh",
+                      left: `${isMobile ? "null" : "120px"}`,
+                      right: `${isMobile ? "40px" : "null"}`,
+                      position: "fixed",
+                      margin: "5px 0px",
+                      zoom: `${isMobile ? "85%" : "100%"}`,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <img
+                      style={{ width: "20px", height: "20px" }}
+                      src={MaticToken}
+                    />
+                  </a>
+                </div>
+              </>
             )}
           </div>
           {/* <div

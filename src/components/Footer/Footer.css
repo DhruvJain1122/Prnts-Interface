@@ -3,8 +3,8 @@
   margin-top: auto;
   padding: 10px 40px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
+  /* grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px; */
   /* box-shadow: inset 21px 21px 42px #dde3e4, inset -21px -21px 42px #f5fbfc; */
   /* box-shadow: 21px 21px 42px #dde3e4, -21px -21px 42px #f5fbfc; */
   background: #e9eff0;
