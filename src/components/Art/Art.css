@@ -52,6 +52,9 @@
   box-shadow: 5px 5px 12px #dbe1e2, -5px -5px 12px #f7fdfe;
   display: grid;
   justify-self: center;
+  margin: 0px 10px 10px 10px;
+  justify-content: center;
+  align-content: center;
 }
 /* transform: translateY(-1.5rem); */
 
@@ -64,6 +67,11 @@
 .video-player {
   border-radius: 20px;
 }
+
+/* .video-player img {
+  width: fit-content;
+  height: fit-content;
+} */
 
 .det {
   box-sizing: border-box;

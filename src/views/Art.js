@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 // import { ReactVideo, ReactAudio, YoutubePlayer } from "reactjs-media";
 import ReactPlayer from "react-player";
 import "../components/Art/Art.css";
@@ -37,6 +38,10 @@ const Art = ({ account, isMobile }) => {
   const [tokenURI, settokenURI] = useState({ attributes: [{ value: 1 }] });
   const [edition, setEdition] = useState(tokenId);
   const [listEditions, setListEditions] = useState(null);
+
+  const VideoWrapper = styled.div`
+    width: ${isMobile} ? 100vw : 70vw
+  `;
 
   //bytes32 for "Open"
   const open =
@@ -178,9 +183,12 @@ const Art = ({ account, isMobile }) => {
               ) : (
                 <ReactPlayer
                   className="video-player"
+                  wrapper={VideoWrapper}
                   controls
                   loop
                   playing
+                  previewTabIndex={0}
+                  muted
                   url={`https://prnts.mypinata.cloud/ipfs/${tokenURI.image.slice(
                     -46
                   )}`}
@@ -197,8 +205,11 @@ const Art = ({ account, isMobile }) => {
                       },
                     },
                   }}
-                  width="70vw"
+                  // width="70vw"
+                  // height="50vh"
+                  width={isMobile ? "100vw" : "70vw"}
                   height="50vh"
+                  // height="100%"
                   // Disable right click
                   onContextMenu={(e) => e.preventDefault()}
                   onError={() => console.log("onError callback")}
