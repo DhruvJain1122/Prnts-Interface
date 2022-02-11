@@ -283,7 +283,7 @@ const Art = ({ account, isMobile }) => {
                     <h3>{tokenURI.name}</h3>
                     <h4>{tokenURI.symbol}</h4>
                     */}
-                    <h3>Welcome to {tokenURI.name} Project!</h3>
+                    <h3>Welcome to the {tokenURI.name} Project!</h3>
                   </div>
                   {/*
                     <div className="editions-dropdown">
@@ -309,7 +309,7 @@ const Art = ({ account, isMobile }) => {
                   margin: "10px 0px 10px 5px",
                 }}
               >
-                <h2>Price:</h2>
+                <h3>Price:</h3>
                 <h3 style={{ padding: "0px 10px" }}>
                   {prntPrice === "0" ? (
                     <span>Free</span>

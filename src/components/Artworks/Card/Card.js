@@ -18,7 +18,7 @@ const Card = ({
         <img src={imageUrl} alt="" />
       </div>
       <div className="card-title">
-        <b>Join {artistName} Project!</b>
+        <b>Join the {artistName} Project!</b>
         {/* <div className="creator">
           <i style={{ paddingRight: "10px", fontFamily: "cursive" }}>Artist:</i>
           <h4 className="artist-link">
