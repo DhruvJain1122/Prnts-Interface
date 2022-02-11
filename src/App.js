@@ -39,6 +39,21 @@ const Container = styled.div`
   justify-content: flex-start;
 `;
 
+const AlertMsg = styled.div`
+  position: fixed;
+  top: 25vh;
+  right: 0;
+  background-color: red;
+  padding: 20px 30px;
+  color: white;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  @media only screen and (max-width: 600px) {
+    zoom: 80%;
+  }
+`;
+
 // console.log("INFURA_ID", infuraId);
 
 const providerOptions = {
@@ -65,7 +80,7 @@ const providerOptions = {
       // networkUrl: `https://mainnet.infura.io/v3/${infuraId}`,
       // networkUrl: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
       networkUrl: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
-      chainId: 1,
+      chainId: 137,
     },
     connector: async (_, options) => {
       const { appName, networkUrl, chainId } = options;
@@ -80,7 +95,7 @@ const providerOptions = {
 };
 
 const web3Modal = new Web3Modal({
-  // network: "mainnet", // optional
+  // network: "matic", // optional
   cacheProvider: true, // optional
   providerOptions, // required
 });
@@ -110,6 +125,8 @@ const changeNetwork = async ({ networkName, setError }) => {
         },
       ],
     });
+
+    console.log("provider: ", provider);
   } catch (err) {
     setError(err.message);
   }
@@ -120,27 +137,14 @@ const App = () => {
   const [windowDimension, setWindowDimension] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [error, setError] = useState();
+  const [chainIdConnected, setChainId] = useState();
 
   const handleNetworkSwitch = async (networkName) => {
     setError();
     await changeNetwork({ networkName, setError });
+    fetchChainId();
+    // window.location.reload();
   };
-
-  const networkChanged = (chainId) => {
-    console.log({ chainId });
-  };
-
-  useEffect(() => {
-    try {
-      window.ethereum.on("chainChanged", networkChanged);
-    } catch (err) {
-      if (err) console.log(err);
-    }
-
-    return () => {
-      window.ethereum.removeListener("chainChanged", networkChanged);
-    };
-  }, []);
 
   useEffect(() => {
     handleNetworkSwitch("polygon");
@@ -201,14 +205,67 @@ const App = () => {
     console.log("cached provider", web3Modal.cachedProvider);
     try {
       provider = await web3Modal.connect();
+      // web3Modal.connect().then(async (provider) => {
+      //   await provider.send({
+      //     method: "wallet_switchEthereumChain",
+      //     params: {
+      //       chainId: "0x89",
+      //     },
+      //   });
+      // });
     } catch (err) {
       console.log("Could not get a wallet connection", err);
       return;
     }
     web3.setProvider(provider);
-    // setweb(web3);
+
+    const id = await web3.eth.getChainId();
+    setChainId(id);
+
+    console.log("chain id: ", id);
+    if (id !== 137) {
+      console.log("if not 137 trying to switch network, provider: ", provider);
+      const payload = {
+        method: "wallet_switchEthereumChain",
+        params: [
+          {
+            chainId: "0x89",
+          },
+        ],
+        // method: "eth_sign",
+        // params: [
+        //   "0x5c0085E600398247a37de389931CCea8EdD3ba67",
+        //   "Connecting to the Prnts NFT platform!",
+        // ],
+      };
+      // provider.request(payload).then(async (res) => {
+      //   console.log("res: ", res);
+      //   const accounts = await web3.eth.getAccounts();
+      //   setaccount(accounts[0]);
+      // });
+      const res = await provider.send(payload, (err) => {
+        if (err) console.log("err on switch to polygon: ", err);
+      });
+
+      console.log("res", res);
+    }
     const accounts = await web3.eth.getAccounts();
     setaccount(accounts[0]);
+
+    // setweb(web3);
+
+    // console.log("provider: ", provider);
+
+    // const res = await provider.send({
+    //   method: "wallet_switchEthereumChain",
+    //   params: {
+    //     chainId: "0x89",
+    //   },
+    // });
+
+    // console.log("res", res);
+
+    // web3.setProvider(provider);
     // console.log("accounts[0]", accounts[0]);
     // console.log("after setProvider", web3);
     // console.log("cached provider on connect: ", web3Modal.cachedProvider)
@@ -274,6 +331,51 @@ const App = () => {
     getIsApproved();
   });
 
+  const fetchChainId = async () => {
+    if (account) {
+      const id = await web3.eth.getChainId();
+      setChainId(id);
+      console.log("chain id: ", id);
+      if (id !== 137) {
+        console.log("if not 137 , provider: ", provider);
+        const res = await provider.send(
+          {
+            method: "wallet_switchEthereumChain",
+            params: {
+              chainId: "0x89",
+            },
+          },
+          (err) => {
+            if (err) console.log("err on switch to polygon: ", err);
+          }
+        );
+
+        console.log("res", res);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchChainId();
+  }, []);
+
+  const networkChanged = (chainId) => {
+    console.log({ chainId });
+    setChainId(chainId);
+  };
+
+  useEffect(() => {
+    try {
+      window.ethereum.on("chainChanged", networkChanged);
+      provider.on("chainChanged", networkChanged);
+    } catch (err) {
+      if (err) console.log(err);
+    }
+    return () => {
+      window.ethereum.removeListener("chainChanged", networkChanged);
+    };
+  }, []);
+
   return (
     <BrowserRouter history={createBrowserHistory}>
       <Container>
@@ -291,6 +393,24 @@ const App = () => {
             // marginBottom: '10px'
           }}
         >
+          {/* <div>chainChanged: {chainIdConnected}</div> */}
+          {account && chainIdConnected !== 137 ? (
+            <AlertMsg>
+              <span>Wrong network :( </span>
+              <br />
+              <span>Please switch to Polygon mainnet & reload!</span>
+              <br />
+              <br />
+              <span>To add Polygon to your metamask, please visit </span>
+              <br />
+              <a href="https://chainlist.org" target="_blank">
+                https://chainlist.org
+              </a>
+              <span> and search for Polygon Mainnet.</span>
+            </AlertMsg>
+          ) : null}
+          {/* {chainIdConnected === 137 ? <AlertMsg>Connected</AlertMsg> : null} */}
+
           <Header account={account} isMobile={isMobile} />
           <div
             style={{

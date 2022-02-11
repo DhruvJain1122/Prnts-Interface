@@ -59,8 +59,8 @@
 /* transform: translateY(-1.5rem); */
 
 .image-c img {
-  height: 500px;
-  width: auto;
+  width: 500px;
+  height: auto;
   max-width: 80vw;
 }
 

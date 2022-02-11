@@ -180,15 +180,17 @@ const Art = ({ account, isMobile }) => {
                   src={`https://prnts.mypinata.cloud/ipfs/${tokenURI.imageHash}`}
                   alt=""
                 />
+              ) : isMobile ? (
+                <img
+                  src={`https://prnts.mypinata.cloud/ipfs/${tokenURI.imageHash}`}
+                  alt=""
+                />
               ) : (
                 <ReactPlayer
                   className="video-player"
                   wrapper={VideoWrapper}
                   controls
-                  loop
-                  playing
                   previewTabIndex={0}
-                  muted
                   url={`https://prnts.mypinata.cloud/ipfs/${tokenURI.image.slice(
                     -46
                   )}`}
