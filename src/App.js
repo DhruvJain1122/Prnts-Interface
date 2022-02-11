@@ -394,7 +394,7 @@ const App = () => {
           }}
         >
           {/* <div>chainChanged: {chainIdConnected}</div> */}
-          {account && chainIdConnected !== 137 ? (
+          {/* {account && chainIdConnected !== 137 ? (
             <AlertMsg>
               <span>Wrong network :( </span>
               <br />
@@ -408,7 +408,7 @@ const App = () => {
               </a>
               <span> and search for Polygon Mainnet.</span>
             </AlertMsg>
-          ) : null}
+          ) : null} */}
           {/* {chainIdConnected === 137 ? <AlertMsg>Connected</AlertMsg> : null} */}
 
           <Header account={account} isMobile={isMobile} />

@@ -171,9 +171,7 @@ const Header = ({ account, isMobile }) => {
                 <MobileNavbar.Item className="lnk">Home</MobileNavbar.Item>
               </NavLink>
               <NavLink exact to="/" activeClassName="selected">
-                <MobileNavbar.Item className="lnk">
-                  Music & More
-                </MobileNavbar.Item>
+                <MobileNavbar.Item className="lnk">Projects</MobileNavbar.Item>
               </NavLink>
               <NavLink exact to="/community" activeClassName="selected">
                 <MobileNavbar.Item className="lnk">Community</MobileNavbar.Item>
@@ -217,7 +215,7 @@ const Header = ({ account, isMobile }) => {
                   <h3 className="link-1">Home</h3>
                 </NavLink>
                 <NavLink exact to="/" activeClassName="selected">
-                  <h3 className="link-1">Music & More</h3>
+                  <h3 className="link-1">Projects</h3>
                 </NavLink>
                 <NavLink exact to="/community" activeClassName="selected">
                   <h3 className="link-1">Community</h3>

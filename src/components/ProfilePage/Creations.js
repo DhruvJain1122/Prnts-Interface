@@ -66,6 +66,7 @@ const Creations = () => {
                   <div key={prnt[0]} onClick={refresh}>
                     <Link to={`/music/${prnt[0]}/${editionToBuy}`}>
                       <Artwork
+                        artistName={tokenURI.name}
                         title={`# ${tokenURI.name} - ${tokenURI.symbol}`}
                         username={`${creator.slice(0, 6)}....${creator.slice(
                           -7,

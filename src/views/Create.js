@@ -287,6 +287,7 @@ const Create = ({ account, isMobile }) => {
         <div className="preview-detail-field">
           <div className="preview-field">
             <PreviewCard
+              artistName={name}
               title={`# ${name} - ${symbol}`}
               username={`${account.slice(0, 6)}....${account.slice(-7, -1)}`}
               price={`${price} MATIC`}

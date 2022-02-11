@@ -1,24 +1,23 @@
 .card-container {
   /* padding: 14px; */
   width: 270px;
-  height: 430px;
+  height: 360px;
   position: relative;
   border-radius: 18px;
   background: rgb(233 239 240);
-  box-shadow: 5px 5px 12px #dbe1e2,
-           -5px -5px 12px #f7fdfe;
+  box-shadow: 5px 5px 12px #dbe1e2, -5px -5px 12px #f7fdfe;
   overflow: auto;
   cursor: pointer;
   transition-property: all;
   transition-duration: 1s;
   transition-timing-function: ease-in;
+  text-align: center;
 }
 
-.card-container:hover{
-  box-shadow: inset 5px 5px 12px #dbe1e2,
-            inset -5px -5px 12px #f7fdfe;
+.card-container:hover {
+  box-shadow: inset 5px 5px 12px #dbe1e2, inset -5px -5px 12px #f7fdfe;
   border-radius: 30px;
-  transform: scale(1.1,1.1);
+  transform: scale(1.1, 1.1);
 }
 /* 
 .artist-link {
@@ -50,8 +49,7 @@
   /* background: rgb(233, 239, 240); */
   display: grid;
   background: #e9eff0;
-  box-shadow: inset 5px 5px 12px #dbe1e2,
-            inset -5px -5px 12px #f7fdfe;
+  box-shadow: inset 5px 5px 12px #dbe1e2, inset -5px -5px 12px #f7fdfe;
   border-radius: 18px;
 }
 

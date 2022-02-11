@@ -79,6 +79,7 @@ const Artworks = () => {
                   <div key={items[0]}>
                     <Link to={`/music/${items[0]}/${editionToBuy}`}>
                       <Card
+                        artistName={tokenURI.name}
                         title={`# ${tokenURI.name} - ${tokenURI.symbol}`}
                         username={creator}
                         price={`${web3.utils.fromWei(

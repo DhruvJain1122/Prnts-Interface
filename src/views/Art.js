@@ -279,22 +279,20 @@ const Art = ({ account, isMobile }) => {
                   }}
                 >
                   <div>
+                    {/* 
                     <h3>{tokenURI.name}</h3>
                     <h4>{tokenURI.symbol}</h4>
+                    */}
+                    <h3>Welcome to {tokenURI.name} Project!</h3>
                   </div>
-                  <div className="editions-dropdown">
+                  {/*
+                    <div className="editions-dropdown">
                     <h3>Edition</h3>
-                    <select
-                      // name="Editions"
-                      value={edition}
-                      onChange={selectEdition}
-                    >
-                      {/* <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option> */}
+                    <select value={edition} onChange={selectEdition}>
                       {listEditions}
                     </select>
                   </div>
+                  */}
                 </div>
 
                 <span>{tokenURI.description}</span>
@@ -311,20 +309,26 @@ const Art = ({ account, isMobile }) => {
                   margin: "10px 0px 10px 5px",
                 }}
               >
-                <h2>Worth:</h2>
+                <h2>Price:</h2>
                 <h3 style={{ padding: "0px 10px" }}>
-                  {web3.utils.fromWei(prntPrice, "ether")} MATIC
+                  {prntPrice === "0" ? (
+                    <span>Free</span>
+                  ) : (
+                    <span>{web3.utils.fromWei(prntPrice, "ether")} MATIC</span>
+                  )}
                 </h3>
               </div>
               <div>
+                {/*
                 <p
                   style={{
                     fontFamily: "cursive",
                     padding: "0px 0px 10px 5px",
                   }}
                 >
-                  Artist royalties: {prnt.royalties}%{" "}
+                  Artist royalties: {prnt.royalties}%
                 </p>
+                */}
               </div>
               <div style={{ padding: "5px 5px" }}>
                 {status === open &&
@@ -332,7 +336,7 @@ const Art = ({ account, isMobile }) => {
                 ownerArray[0] !==
                   account /*if he is the owner buy button won't be shown*/ ? (
                   <button className="btn" onClick={onBuy} disabled={Loading}>
-                    {!Loading && <h4>Buy</h4>}
+                    {!Loading && <h4>Join Project</h4>}
                     {Loading && (
                       <ReactLoading type="bubbles" height="30px" width="30px" />
                     )}
@@ -387,10 +391,12 @@ const Art = ({ account, isMobile }) => {
 
           {/* History */}
 
-          <div className="his-1">
-            <h2>History</h2>
-            <div className="bids-1">{listBids}</div>
-          </div>
+          {/*
+              <div className="his-1">
+              <h2>History</h2>
+              <div className="bids-1">{listBids}</div>
+            </div>
+            */}
         </div>
       </div>
     </>
