@@ -16,6 +16,30 @@ import PrntNFTFactory from "../ethereum/PrntNFTFactory";
 import Modal from "../components/Art/ApproveModal/ApproveModal";
 import useModal from "../hooks/useModal";
 
+import axios from "axios";
+
+const LinkToProfile = styled(Link)`
+  display: grid;
+  height: 100px;
+  width: 100px;
+  border-radius: 100px;
+  /* background: rgb(233, 233, 233); */
+  background: #e9eff0;
+  /* box-shadow: 3px 3px 7px #d3d3d3, -1px -2px 30px #f8f8f8; */
+  box-shadow: 5px 5px 12px #dbe1e2, -5px -5px 12px #f7fdfe;
+  align-self: center;
+  overflow: hidden;
+  margin-top: 10px;
+  justify-content: center;
+  align-content: center;
+
+  img {
+    width: 100px;
+    height: auto;
+    border-radius: 100px;
+  }
+`;
+
 const Art = ({ account, isMobile }) => {
   const { id, tokenId } = useParams();
 
@@ -38,6 +62,12 @@ const Art = ({ account, isMobile }) => {
   const [tokenURI, settokenURI] = useState({ attributes: [{ value: 1 }] });
   const [edition, setEdition] = useState(tokenId);
   const [listEditions, setListEditions] = useState(null);
+  const [creator, setCreator] = useState({
+    name: "",
+    username: "",
+    about: "",
+    pfpHash: "",
+  });
 
   const VideoWrapper = styled.div`
     width: ${isMobile} ? 100vw : 70vw
@@ -167,6 +197,16 @@ const Art = ({ account, isMobile }) => {
     window.location.reload();
   };
 
+  const getCreatorData = async () => {
+    const url = `https://prnts-nfts.herokuapp.com/api/users/${ownerArray[0]}`;
+    const res = await axios.get(url);
+    setCreator(res.data);
+  };
+
+  useEffect(() => {
+    getCreatorData();
+  }, [ownerArray]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <>
       <div style={{ maxWidth: "100vw" }}>
@@ -283,7 +323,9 @@ const Art = ({ account, isMobile }) => {
                     <h3>{tokenURI.name}</h3>
                     <h4>{tokenURI.symbol}</h4>
                     */}
-                    <h3>Welcome to the {tokenURI.name} Project!</h3>
+                    <h3 style={{ textAlign: "center" }}>
+                      Welcome to {tokenURI.name}'s Project!
+                    </h3>
                   </div>
                   {/*
                     <div className="editions-dropdown">
@@ -294,9 +336,19 @@ const Art = ({ account, isMobile }) => {
                   </div>
                   */}
                 </div>
-
-                <span>{tokenURI.description}</span>
               </div>
+              <span style={{ margin: "10px" }}>{tokenURI.description}</span>
+              {/* Profile image */}
+              <LinkToProfile to={`/profile/${ownerArray[0]}`}>
+                <img
+                  src={
+                    creator.pfpHash
+                      ? `https://prnts.mypinata.cloud/ipfs/${creator.pfpHash}`
+                      : null
+                  }
+                  alt=""
+                />
+              </LinkToProfile>
               {/* <p>Animation and music created by Nacho </p>
                         <p>1400x1400</p>
                         <p>30fps</p> */}

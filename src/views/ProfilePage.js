@@ -18,7 +18,12 @@ import "../components/ProfilePage/ProfilePage.css";
 const axios = require("axios");
 
 const ProfilePage = ({ account, isMobile }) => {
-  const [user, setUser] = useState({ name: "", username: "", about: "" });
+  const [user, setUser] = useState({
+    name: "",
+    username: "",
+    about: "",
+    pfpHash: "",
+  });
   const { id } = useParams();
 
   const getUserData = async () => {
