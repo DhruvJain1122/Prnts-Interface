@@ -53,6 +53,12 @@
   padding: 5px 30px;
   margin-top: auto;
   margin-bottom: auto;
+  display: grid;
+  justify-items: center;
+}
+
+.intro-content a button {
+  min-width: 160px;
 }
 
 .gradient-underline {
