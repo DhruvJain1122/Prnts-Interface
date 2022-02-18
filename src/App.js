@@ -23,9 +23,12 @@ import Web3Modal from "web3modal";
 import web3 from "./ethereum/web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { WalletLink } from "walletlink";
+import { CircularProgress,Box } from '@mui/material'
 
 import coinbaseLogo from "./assets/images/coinbase-wallet-logo.svg";
 import NotApproved from "./components/Create/NotApproved/NotApproved";
+import { useAsync } from "react-use";
+import LensHub from "./ethereum/LensHub";
 
 const axios = require("axios");
 
@@ -65,6 +68,7 @@ const providerOptions = {
         1: `https://mainnet.infura.io/v3/${infuraId}`,
         4: `https://rinkeby.infura.io/v3/${infuraId}`,
         137: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
+        80001: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
       },
     },
   },
@@ -79,8 +83,9 @@ const providerOptions = {
       appName: "Prnts",
       // networkUrl: `https://mainnet.infura.io/v3/${infuraId}`,
       // networkUrl: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
-      networkUrl: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
-      chainId: 137,
+      // networkUrl: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
+      networkUrl: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
+      chainId: 80001,
     },
     connector: async (_, options) => {
       const { appName, networkUrl, chainId } = options;
@@ -111,6 +116,17 @@ const networks = {
     },
     rpcUrls: ["https://polygon-rpc.com/"],
     blockExplorerUrls: ["https://polygonscan.com/"],
+  },
+  polygon_mumbai: {
+    chainId: `0x${Number(80001).toString(16)}`,
+    chainName: "Polygon Mumbai",
+    nativeCurrency: {
+      name: "MATIC",
+      symbol: "MATIC",
+      decimals: 18,
+    },
+    rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
+    blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
   },
 };
 
@@ -147,7 +163,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    handleNetworkSwitch("polygon");
+    handleNetworkSwitch("polygon_mumbai");
   }, []);
 
   const IsMobile = windowDimension <= 700;
@@ -223,7 +239,7 @@ const App = () => {
     setChainId(id);
 
     console.log("chain id: ", id);
-    if (id !== 137) {
+    if (id !== 80001) {
       console.log("if not 137 trying to switch network, provider: ", provider);
       const payload = {
         method: "wallet_switchEthereumChain",
@@ -273,6 +289,7 @@ const App = () => {
     // console.log("provider",web3.currentProvider);
     // window.location.reload();
   };
+  const { value: checkHasProfile = 0, loading } = useAsync(async () => await LensHub.methods.balanceOf(account).call(), [account])
 
   const onDisconnect = async (e) => {
     e.preventDefault();
@@ -314,29 +331,29 @@ const App = () => {
     window.location.reload();
   };
 
-  const [isApproved, setIsApproved] = useState(false);
+  const [isApproved, setIsApproved] = useState(true);
 
-  const getIsApproved = async () => {
-    const url = `https://prnts-nfts.herokuapp.com/api/approvalRequests/${account}/isApproved`;
-    try {
-      const res = await axios.get(url);
-      setIsApproved(res.data);
-      // console.log(res.data);
-    } catch (err) {
-      if (err) console.log(err);
-    }
-  };
+  // const getIsApproved = async () => {
+  //   const url = `https://prnts-nfts.herokuapp.com/api/approvalRequests/${account}/isApproved`;
+  //   try {
+  //     const res = await axios.get(url);
+  //     setIsApproved(res.data);
+  //     // console.log(res.data);
+  //   } catch (err) {
+  //     if (err) console.log(err);
+  //   }
+  // };
 
-  useEffect(() => {
-    getIsApproved();
-  });
+  // useEffect(() => {
+  //   getIsApproved();
+  // });
 
   const fetchChainId = async () => {
     if (account) {
       const id = await web3.eth.getChainId();
       setChainId(id);
       console.log("chain id: ", id);
-      if (id !== 137) {
+      if (id !== 80001) {
         console.log("if not 137 , provider: ", provider);
         const res = await provider.send(
           {
@@ -376,6 +393,13 @@ const App = () => {
     };
   }, []);
 
+  if(loading){
+    return (
+      <Box justifyContent="center" alignItems="center" display="flex" height="100vh">
+        <CircularProgress size={60} />
+      </Box>
+    )
+  }
   return (
     <BrowserRouter history={createBrowserHistory}>
       <Container>
@@ -411,7 +435,7 @@ const App = () => {
           ) : null} */}
           {/* {chainIdConnected === 137 ? <AlertMsg>Connected</AlertMsg> : null} */}
 
-          <Header account={account} isMobile={isMobile} />
+          <Header account={account} isMobile={isMobile} checkHasProfile={checkHasProfile}/>
           <div
             style={{
               // marginLeft: "0px",

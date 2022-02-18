@@ -15,6 +15,7 @@ import PrntNFTFactory from "../ethereum/PrntNFTFactory";
 
 import Modal from "../components/Art/ApproveModal/ApproveModal";
 import useModal from "../hooks/useModal";
+import {Grid} from '@mui/material';
 
 import axios from "axios";
 
@@ -212,56 +213,9 @@ const Art = ({ account, isMobile }) => {
       <div style={{ maxWidth: "100vw" }}>
         {/* <h1>Artwork display</h1> */}
         {/* art piece */}
-        <div className="art-c">
-          <div className="image-c">
-            {tokenURI.image ? (
-              tokenURI.image.slice(-4) === "null" ? (
-                <img
-                  src={`https://prnts.mypinata.cloud/ipfs/${tokenURI.imageHash}`}
-                  alt=""
-                />
-              ) : isMobile ? (
-                <img
-                  src={`https://prnts.mypinata.cloud/ipfs/${tokenURI.imageHash}`}
-                  alt=""
-                />
-              ) : (
-                <ReactPlayer
-                  className="video-player"
-                  wrapper={VideoWrapper}
-                  controls
-                  previewTabIndex={0}
-                  url={`https://prnts.mypinata.cloud/ipfs/${tokenURI.image.slice(
-                    -46
-                  )}`}
-                  // url={tokenURI.image}
-                  light={
-                    isMobile
-                      ? `https://prnts.mypinata.cloud/ipfs/${tokenURI.imageHash}`
-                      : false
-                  }
-                  config={{
-                    file: {
-                      attributes: {
-                        controlsList: "nodownload",
-                      },
-                    },
-                  }}
-                  // width="70vw"
-                  // height="50vh"
-                  width={isMobile ? "100vw" : "70vw"}
-                  height="50vh"
-                  // height="100%"
-                  // Disable right click
-                  onContextMenu={(e) => e.preventDefault()}
-                  onError={() => console.log("onError callback")}
-                />
-              )
-            ) : null}
-          </div>
-        </div>
+        
         {/* creator and owner */}
-        <div className="det">
+        {/* <div className="det">
           <div className="css-4cffwv">
             <Link to={`/profile/${ownerArray[0]}`}>
               <div className="css-1mitdaa">
@@ -294,7 +248,7 @@ const Art = ({ account, isMobile }) => {
               </Link>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* description & history */}
         <div className="desc-his">
           <div className="desc">
@@ -349,96 +303,30 @@ const Art = ({ account, isMobile }) => {
                   alt=""
                 />
               </LinkToProfile>
+                
+              <Grid container justifyContent="space-between">
+                    <Grid item >
+                    <button className="btn" >
+                    <h4>share</h4>
+                    
+                </button>
+           
+                    </Grid>
+                    <Grid item>
+                    <button className="btn" onClick={onBuy} disabled={Loading}>
+                    {!Loading && <h4>follow</h4>}
+                    {Loading && (
+                      <ReactLoading type="bubbles" height="30px" width="30px" />
+                    )}
+                </button>
+           
+                    </Grid>
+                </Grid>
               {/* <p>Animation and music created by Nacho </p>
                         <p>1400x1400</p>
                         <p>30fps</p> */}
             </div>
-            <div className="desc-1">
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  margin: "10px 0px 10px 5px",
-                }}
-              >
-                <h3>Price:</h3>
-                <h3 style={{ padding: "0px 10px" }}>
-                  {prntPrice === "0" ? (
-                    <span>Free</span>
-                  ) : (
-                    <span>{web3.utils.fromWei(prntPrice, "ether")} MATIC</span>
-                  )}
-                </h3>
-              </div>
-              <div>
-                {/*
-                <p
-                  style={{
-                    fontFamily: "cursive",
-                    padding: "0px 0px 10px 5px",
-                  }}
-                >
-                  Artist royalties: {prnt.royalties}%
-                </p>
-                */}
-              </div>
-              <div style={{ padding: "5px 5px" }}>
-                {status === open &&
-                ownerArray[totalOwners - 1] !== account &&
-                ownerArray[0] !==
-                  account /*if he is the owner buy button won't be shown*/ ? (
-                  <button className="btn" onClick={onBuy} disabled={Loading}>
-                    {!Loading && <h4>Join Project</h4>}
-                    {Loading && (
-                      <ReactLoading type="bubbles" height="30px" width="30px" />
-                    )}
-                  </button>
-                ) : null}
-                {ownerArray[totalOwners - 1] === account ? (
-                  status === open ? (
-                    <p style={{ color: "green" }}>**Opened for trade</p>
-                  ) : (
-                    <>
-                      <button
-                        className="btn"
-                        onClick={toggle}
-                        disabled={Loading}
-                      >
-                        <h4>Trade</h4>
-                      </button>
-                      <Modal
-                        isShowing={isShowing}
-                        hide={toggle}
-                        prnt={prnt}
-                        id={id}
-                        tokenId={tokenId}
-                        PRNT_NFT_MARKETPLACE={PRNT_NFT_MARKETPLACE}
-                        instance={instance}
-                        isApproved={isApproved}
-                        account={account}
-                        totalOwners={totalOwners}
-                      />
-                    </>
-                  )
-                ) : null}
-
-                {status !== open && ownerArray[totalOwners - 1] !== account ? (
-                  <p style={{ color: "red" }}>**Not open for trade</p>
-                ) : null}
-              </div>
-              <Link
-                className="view-on"
-                to={{
-                  //   pathname: `https://testnets.opensea.io/assets/${id}/${edition}`,
-                  pathname: `https://opensea.io/assets/matic/${id}/${edition}`,
-                }}
-                target="_blank"
-              >
-                <h4>
-                  View on OpenSea <FaExternalLinkAlt />
-                </h4>
-              </Link>
-            </div>
+            
           </div>
 
           {/* History */}

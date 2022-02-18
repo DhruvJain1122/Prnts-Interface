@@ -6,9 +6,14 @@ import { Link, NavLink } from "react-router-dom";
 // import web3 from '../ethereum/web3';
 import styled from "styled-components";
 import "./Dropdown.css";
+import LensHub from "../../ethereum/LensHub";
 import prntsLogo from "../../assets/images/prnts-logo.png";
+import web3 from "../../ethereum/web3";
+import { useMemo } from "react";
+import { useAsync } from "react-use";
+import { useEffect } from "react";
 
-const Header = ({ account, isMobile }) => {
+const Header = ({ account, isMobile,checkHasProfile }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const refreshPage = async () => {
@@ -96,7 +101,17 @@ const Header = ({ account, isMobile }) => {
       border-radius: 15px;
     `,
   };
-
+  // const checkHasProfile=0;
+  // console.log(checkHasProfile)
+  // useEffect(() => {
+  //   console.log("checkHasProfile")
+  //   console.log(checkHasProfile)
+  
+    
+  // }, [checkHasProfile])
+  
+  
+  console.log(checkHasProfile)
   return (
     <div>
       {
@@ -231,16 +246,18 @@ const Header = ({ account, isMobile }) => {
             >
               {account === "" || typeof account === "undefined" ? null : ( // <ConnectWallet isMobile={isMobile} account={account} /> // <button className="btn" id="connect wallet">Connect Wallet</button>
                 <div className="profile-links">
-                  <div onClick={refreshPage}>
+                  {checkHasProfile > 0 ? 
+                  (<div onClick={refreshPage}>
                     <Link to={`/profile/${account}`}>
                       <h4 className="link-2">Profile</h4>
                     </Link>
-                  </div>
-                  <div>
-                    <Link to="/create">
-                      <h4 className="link-2">+Create</h4>
-                    </Link>
-                  </div>
+                  </div>)
+                : <div>
+                <Link to="/create">
+                  <h4 className="link-2">+Create</h4>
+                </Link>
+              </div>}
+                  
                   {/* <ConnectWallet isMobile={isMobile} account={account} /> */}
                 </div>
               )}

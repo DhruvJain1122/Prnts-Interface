@@ -6,7 +6,8 @@ import web3 from "../ethereum/web3";
 import PrntNFTFactory from "../ethereum/PrntNFTFactory";
 import PreviewCard from "../components/Artworks/Card/Card";
 // import { isMobile } from 'web3modal';
-
+import LensHub from '../ethereum/LensHub'
+import MockProfileCreationProxy from '../ethereum/MockProfileCreationProxy'
 const axios = require("axios");
 const FormData = require("form-data");
 
@@ -121,50 +122,66 @@ const Create = ({ account, isMobile }) => {
     const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
 
     try {
-      const res = await axios.post(url, metadata, {
-        maxContentLength: "Infinity",
-        // __filename: `${metadata.name}.json`,
-        headers: {
-          // 'Content-Type': `application/json; boundary=${data._boundary}`,
-          pinata_api_key: pinataApiKey,
-          pinata_secret_api_key: pinataSecretApiKey,
-        },
-      });
+      // const res = await axios.post(url, metadata, {
+      //   maxContentLength: "Infinity",
+      //   // __filename: `${metadata.name}.json`,
+      //   headers: {
+      //     // 'Content-Type': `application/json; boundary=${data._boundary}`,
+      //     pinata_api_key: pinataApiKey,
+      //     pinata_secret_api_key: pinataSecretApiKey,
+      //   },
+      // });
 
-      // if (!res.success) {
-      //     return {
-      //         success: false,
-      //         status:
-      //             '😢 Something went wrong while uploading your tokenURI.',
-      //     };
-      // }
+      // // if (!res.success) {
+      // //     return {
+      // //         success: false,
+      // //         status:
+      // //             '😢 Something went wrong while uploading your tokenURI.',
+      // //     };
+      // // }
 
-      // console.log(res.data);
-      const tokenURI = res.data.IpfsHash;
-      console.log(
-        "argg: ",
-        name,
-        symbol,
-        tokenURI,
-        web3.utils.toWei(price, "ether"),
-        editions ? editions : "1",
-        royalties
-      );
-
+      // // console.log(res.data);
+      // const tokenURI = res.data.IpfsHash;
+      // console.log(
+      //   "argg: ",
+      //   name,
+      //   symbol,
+      //   tokenURI,
+      //   web3.utils.toWei(price, "ether"),
+      //   editions ? editions : "1",
+      //   royalties
+      // );
+      const config = {
+        from: account,
+      }
+    // const estimatedGas = await LensHub.methods.whitelistProfileCreator(account,true).estimateGas(config)
+    // await LensHub.methods.whitelistProfileCreator(account,true).send({...config, gas: 999999})
+      const inputStruct = {
+        to:account,
+        handle: name,
+        imageURI:
+        'https://prnts.mypinata.cloud/ipfs/' + imageHash,
+        followModule: '0x0000000000000000000000000000000000000000',
+        followModuleData: [],
+        followNFTURI:
+          'https://prnts.mypinata.cloud/ipfs/' + imageHash,
+      };
+      // const estimatedGas2 = await LensHub.methods.createProfile(inputStruct).estimateGas(config)
+      await MockProfileCreationProxy.methods.proxyCreateProfile(inputStruct).send({...config, gas: 999999})
       // contract will have name, symbol, tokenUri - ERC721 constructor(name, symbol)
-      await PrntNFTFactory.methods
-        .createNewPrntNFT(
-          name,
-          symbol,
-          tokenURI,
-          web3.utils.toWei(price, "ether"),
-          editions ? editions : "1",
-          royalties
-        )
-        .send({
-          from: account,
-          // gasLimit: "3495141",
-        });
+      // await PrntNFTFactory.methods
+      //   .createNewPrntNFT(
+      //     name,
+      //     symbol,
+      //     tokenURI,
+      //     web3.utils.toWei(price, "ether"),
+      //     editions ? editions : "1",
+      //     royalties
+      //   )
+      //   .send({
+      //     from: account,
+      //     // gasLimit: "3495141",
+      //   });
 
       // await PrntNFTFactory.methods
       //     .createNewPrntNFT(
@@ -202,45 +219,7 @@ const Create = ({ account, isMobile }) => {
           <div className="upload-box">
             {/* <h2 style={{ margin: '10px 50px 10px 50px' }}>Create NFTS</h2> */}
             <div className="uploads">
-              {!videoHash ? (
-                <div
-                  className={isMobile ? "upload-file mobile" : "upload-file"}
-                >
-                  <div className="upload-text">
-                    <h3>Upload Video</h3>
-                  </div>
-                  <div className="choose-file">
-                    <form onSubmit={pinVideoToIPFS}>
-                      {/* <input type="file" accept="image/*" onChange={captureFile} /> */}
-                      <input
-                        type="file"
-                        className="custom-file-input"
-                        accept="video/mp4,video/x-m4v,video/*"
-                        // value={selectedFile || ''}
-                        onChange={(e) => setselectedVideo(e.target.files[0])}
-                      />
-                      <button type="submit" className="btn">
-                        {!videoUpload && <h4>Upload Video</h4>}
-                        {videoUpload && (
-                          <ReactLoading
-                            type={"bubbles"}
-                            height={30}
-                            width={30}
-                          />
-                        )}
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              ) : (
-                <div
-                  className={isMobile ? "upload-file mobile" : "upload-file"}
-                >
-                  <h2 style={{ color: "#a3d0d2db" }}>Video Uploaded!</h2>
-                  <span>{selectedVideo.name}</span>
-                  {/* <h4 style={{marginTop: "40px"}}>Please enter rest details...</h4> */}
-                </div>
-              )}
+              
               {!imageHash ? (
                 <div
                   className={isMobile ? "upload-file mobile" : "upload-file"}
