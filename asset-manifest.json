@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/Prnts-Interface/static/css/main.0ea357e1.chunk.css",
+    "main.js": "/Prnts-Interface/static/js/main.6c332e17.chunk.js",
+    "main.js.map": "/Prnts-Interface/static/js/main.6c332e17.chunk.js.map",
+    "runtime-main.js": "/Prnts-Interface/static/js/runtime-main.db776c53.js",
+    "runtime-main.js.map": "/Prnts-Interface/static/js/runtime-main.db776c53.js.map",
+    "static/js/2.865d5c9d.chunk.js": "/Prnts-Interface/static/js/2.865d5c9d.chunk.js",
+    "static/js/2.865d5c9d.chunk.js.map": "/Prnts-Interface/static/js/2.865d5c9d.chunk.js.map",
+    "index.html": "/Prnts-Interface/index.html",
+    "precache-manifest.c430dd1a0e7412e1f27675efe2ff0cbb.js": "/Prnts-Interface/precache-manifest.c430dd1a0e7412e1f27675efe2ff0cbb.js",
+    "service-worker.js": "/Prnts-Interface/service-worker.js",
+    "static/css/main.0ea357e1.chunk.css.map": "/Prnts-Interface/static/css/main.0ea357e1.chunk.css.map",
+    "static/media/Intro-image2.jpg": "/Prnts-Interface/static/media/Intro-image2.a28c4350.jpg",
+    "static/media/coinbase-wallet-logo.svg": "/Prnts-Interface/static/media/coinbase-wallet-logo.2784f954.svg",
+    "static/media/default-profile.jpg": "/Prnts-Interface/static/media/default-profile.e1648d04.jpg",
+    "static/media/matic-token-icon.webp": "/Prnts-Interface/static/media/matic-token-icon.3cb96389.webp",
+    "static/media/prnts-logo.png": "/Prnts-Interface/static/media/prnts-logo.4b56c01c.png",
+    "static/media/profile.png": "/Prnts-Interface/static/media/profile.3d48bf6e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.db776c53.js",
+    "static/js/2.865d5c9d.chunk.js",
+    "static/css/main.0ea357e1.chunk.css",
+    "static/js/main.6c332e17.chunk.js"
+  ]
+}
